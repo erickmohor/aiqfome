@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { ChangeEventHandler, useState } from "react";
 import { SearchIcon } from "lucide-react";
 import Header from "./_components/header";
@@ -26,6 +27,16 @@ export default function Home() {
           />
         </div>
       </form>
+
+      <Image
+        alt="Banner promocional - Rango barato no dia das crianças - Peça com até 50% off"
+        src="/promo-banner.png"
+        height={0}
+        width={0}
+        className="h-auto w-full object-contain"
+        sizes="100%"
+        quality={100}
+      />
     </div>
   );
 }
