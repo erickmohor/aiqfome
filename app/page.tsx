@@ -33,7 +33,7 @@ export default function Home() {
         src="/promo-banner.png"
         height={0}
         width={0}
-        className="h-auto w-full object-contain"
+        className="mt-[1px] h-[134px] w-full object-contain"
         sizes="100%"
         quality={100}
       />
