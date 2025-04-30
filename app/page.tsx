@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ChangeEventHandler, useState } from "react";
 import { SearchIcon } from "lucide-react";
 import Header from "./_components/header";
+import EstablishmentList from "./_components/establishment-list";
 
 export default function Home() {
   const [value, setValue] = useState("");
@@ -33,10 +34,14 @@ export default function Home() {
         src="/promo-banner.png"
         height={0}
         width={0}
-        className="mt-[1px] h-[134px] w-full object-contain"
+        className="mt-[1px] max-h-[135px] w-full object-contain"
         sizes="100%"
         quality={100}
       />
+
+      <main className="flex-1">
+        <EstablishmentList />
+      </main>
     </div>
   );
 }
