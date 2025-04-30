@@ -4,6 +4,7 @@ import { ChangeEventHandler, useState } from "react";
 import { SearchIcon } from "lucide-react";
 import Header from "./_components/header";
 import EstablishmentList from "./_components/establishment-list";
+import Footer from "./_components/footer";
 
 export default function Home() {
   const [value, setValue] = useState("");
@@ -13,7 +14,7 @@ export default function Home() {
   };
 
   return (
-    <div className="h-full">
+    <div className="flex h-full flex-col">
       <Header />
 
       <form className="bg-purple-500 pr-4 pb-4 pl-4">
@@ -42,6 +43,8 @@ export default function Home() {
       <main className="flex-1">
         <EstablishmentList />
       </main>
+
+      <Footer />
     </div>
   );
 }
