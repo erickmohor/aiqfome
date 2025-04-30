@@ -11,6 +11,29 @@
   --font-main: var(--font-nunito);
 }
 
+@theme {
+  --color-purple-200: #eecffc;
+  --color-purple-500: #7b1fa2;
+  --color-purple-700: #580f78;
+
+  --color-light: #6d6f73;
+
+  --color-neutrals-50: #f5f6f9;
+  --color-neutrals-100: #eef0f5;
+  --color-neutrals-400: #a8adb7;
+  --color-neutrals-500: #6d6f73;
+  --color-neutrals-700: #393a3c;
+  --color-neutrals-900: #202326;
+
+  --color-yellow-500: #ffb300;
+
+  --color-teal-50: #f2fafa;
+  --color-teal-400: #00a296;
+  --color-teal-600: #027a7a;
+
+  --color-green-500: #02a117;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
