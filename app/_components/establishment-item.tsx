@@ -1,12 +1,16 @@
 import { Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function EstablishmentItem() {
   const withDeliveryFee = true;
   const isClosed = false;
 
   return (
-    <div className="bg-neutrals-50 flex items-center gap-3 overflow-hidden rounded-lg sm:min-w-[250px]">
+    <Link
+      href="/estabelecimentos/matsuri-concept"
+      className="bg-neutrals-50 flex items-center gap-3 overflow-hidden rounded-lg sm:min-w-[250px]"
+    >
       <div className="border-neutrals-100 relative h-[72px] min-w-[72px] rounded-tl-lg rounded-bl-lg border-[1px]">
         <Image
           alt="Matsuri Concept Logo"
@@ -55,6 +59,6 @@ export default function EstablishmentItem() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
