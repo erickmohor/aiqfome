@@ -1,6 +1,7 @@
 import DeliveryInfo from "@/app/_components/delivery-info";
 import Footer from "@/app/_components/footer";
 import Header from "@/app/_components/header";
+import Menu from "@/app/_components/menu";
 import { ChevronRight, Heart, Share2, Star } from "lucide-react";
 import Image from "next/image";
 
@@ -22,9 +23,9 @@ export default async function EstablishmentPage({
     <div className="flex h-full flex-col">
       <Header />
 
-      <main className="flex-1 px-4 py-6 sm:flex sm:flex-col sm:items-center">
+      <main className="flex-1 py-6 sm:flex sm:flex-col sm:items-center">
         <div className="max-w-[400px] sm:w-[400px]">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 px-4">
             <div className="border-neutrals-100 relative h-9 w-9 overflow-hidden rounded-sm border">
               <Image
                 alt="Matsuri Concept Logo"
@@ -40,7 +41,7 @@ export default async function EstablishmentPage({
             </h1>
           </div>
 
-          <div className="mt-2 flex items-center justify-between text-xs">
+          <div className="mt-2 mb-2 flex items-center justify-between px-4 text-xs">
             <div className="mt-1 flex gap-3">
               <button className="p-1 text-purple-700">
                 <Share2 size={24} className="rotate-180" />
@@ -56,11 +57,11 @@ export default async function EstablishmentPage({
             </button>
           </div>
 
-          <div className="mt-1.5">
+          <div className="mt-1.5 px-4">
             <DeliveryInfo />
           </div>
 
-          <div className="mt-2 flex items-center gap-1.5 text-xs">
+          <div className="mt-2 flex items-center gap-1.5 px-4 text-xs">
             <div className="flex items-center gap-1">
               <Star size={18} color="#FFB300" fill="#FFB300" />
               <span className="text-light text-sm font-bold">4.7 de 5</span>
@@ -71,9 +72,13 @@ export default async function EstablishmentPage({
             <span className="font-bold text-green-500">fecha às 20:00</span>
           </div>
 
-          <p className="text-light mt-1 text-xs font-bold">
+          <p className="text-light mt-1 px-4 text-xs font-bold">
             pedido mínimo: R$ 15,00
           </p>
+        </div>
+
+        <div className="mt-4">
+          <Menu />
         </div>
       </main>
 
