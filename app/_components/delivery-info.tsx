@@ -27,7 +27,7 @@ export default function DeliveryInfo() {
         <span className="text-light text-xs font-bold">5.2km</span>
       </div>
 
-      <div className="mt-1 w-fit rounded-sm bg-teal-50 px-2 py-1.5">
+      <div className="mt-1.5 flex w-fit items-center rounded-sm bg-teal-50 px-2 py-1.5">
         <span className="text-xs font-bold text-teal-600">
           entrega grátis acima de R$ 35,00
         </span>
