@@ -1,8 +1,8 @@
-import { IEstablishmentResponse } from "../_services/establishment";
+import { IGetAllGroupedByStatusResponse } from "../_services/establishment";
 import EstablishmentItem from "./establishment-item";
 
 interface EstablishmentListProps {
-  establishments: IEstablishmentResponse | undefined;
+  establishments: IGetAllGroupedByStatusResponse | undefined;
 }
 
 export default function EstablishmentList({
