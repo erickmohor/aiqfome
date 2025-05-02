@@ -6,7 +6,7 @@ import Header from "./_components/header";
 import EstablishmentList from "./_components/establishment-list";
 import Footer from "./_components/footer";
 import { useQuery } from "@tanstack/react-query";
-import { establishment } from "./_services/establishment";
+import { establishmentService } from "./_services/establishment";
 import { Loading } from "./_components/ui/loading";
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
   const { data, isLoading } = useQuery({
     queryKey: ["establishments-grouped-by-status", searchValue],
     queryFn: async () =>
-      await establishment.getAllGroupedByStatus({ search: searchValue }),
+      await establishmentService.getAllGroupedByStatus({ search: searchValue }),
   });
 
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
