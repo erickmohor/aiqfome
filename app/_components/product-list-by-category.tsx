@@ -25,7 +25,7 @@ export function ProductListByCategory({
   }, [initOpen]);
 
   return (
-    <div className="max-w-[400px] bg-white p-4 sm:w-[400px]">
+    <div className="bg-white p-4">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div className="flex items-center justify-between gap-2">
           <div>
