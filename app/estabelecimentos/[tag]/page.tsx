@@ -1,7 +1,7 @@
 import DeliveryInfo from "@/app/_components/delivery-info";
 import Footer from "@/app/_components/footer";
 import Header from "@/app/_components/header";
-import Menu from "@/app/_components/menu";
+import { Menu } from "@/app/_components/menu";
 import { ChevronRight, Heart, Share2, Star } from "lucide-react";
 import Image from "next/image";
 
