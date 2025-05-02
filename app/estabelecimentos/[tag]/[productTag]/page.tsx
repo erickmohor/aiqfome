@@ -1,7 +1,7 @@
+import { ButtonAddToTicket } from "@/app/_components/button-add-to-ticket";
 import Footer from "@/app/_components/footer";
 import Header from "@/app/_components/header";
 import { ProductItem } from "@/app/_components/product-item";
-import { Button } from "@/app/_components/ui/button";
 import { Textarea } from "@/app/_components/ui/textarea";
 import Image from "next/image";
 
@@ -67,7 +67,7 @@ export default async function EstablishmentProductPage({
                   </span>
                 </div>
               </div>
-              <Button>adicionar</Button>
+              <ButtonAddToTicket />
             </div>
           </div>
 
