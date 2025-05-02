@@ -1,0 +1,444 @@
+[
+  {
+    "id": "1",
+    "category": "burger",
+    "name": "Burger King",
+    "image": "https://i.ibb.co/dJ3qR8xm/burger-king.png",
+    "rating": 4.2,
+    "address": "Av. Paulista, 1000, São Paulo, SP",
+    "cnpj": "12.345.678/0001-90",
+    "delivery_fees": [{ "city": "São Paulo", "value": 10.0 }],
+    "delivery_time_in_minutes": { "min": 20, "max": 40 },
+    "min_purchase_value": 20.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "10:00", "closes": "22:00" },
+      "tuesday": { "opens": "10:00", "closes": "22:00" },
+      "wednesday": { "opens": "10:00", "closes": "22:00" },
+      "thursday": { "opens": "10:00", "closes": "22:00" },
+      "friday": { "opens": "10:00", "closes": "23:00" },
+      "saturday": { "opens": "10:00", "closes": "23:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "2",
+    "category": "burger",
+    "name": "McDonald's",
+    "image": "https://i.ibb.co/bjpHRT9s/mcdonalds.png",
+    "rating": 4.5,
+    "address": "Rua da Consolação, 1300, São Paulo, SP",
+    "cnpj": "98.765.432/0001-10",
+    "delivery_fees": [{ "city": "São Paulo", "value": 8.0 }],
+    "delivery_time_in_minutes": { "min": 15, "max": 30 },
+    "min_purchase_value": 15.0,
+    "payment_methods": {
+      "app": ["Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "09:00", "closes": "22:00" },
+      "tuesday": { "opens": "09:00", "closes": "22:00" },
+      "wednesday": { "opens": "09:00", "closes": "22:00" },
+      "thursday": { "opens": "09:00", "closes": "22:00" },
+      "friday": { "opens": "09:00", "closes": "23:00" },
+      "saturday": { "opens": "09:00", "closes": "23:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "3",
+    "category": "lanches",
+    "name": "Subway",
+    "image": "https://i.ibb.co/G4PnP5Y1/subway.png",
+    "rating": 3.9,
+    "address": "Rua dos Três Irmãos, 250, São Paulo, SP",
+    "cnpj": "23.456.789/0001-30",
+    "delivery_fees": [{ "city": "São Paulo", "value": 7.5 }],
+    "delivery_time_in_minutes": { "min": 10, "max": 30 },
+    "min_purchase_value": 18.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "08:00", "closes": "21:00" },
+      "tuesday": { "opens": "08:00", "closes": "21:00" },
+      "wednesday": { "opens": "08:00", "closes": "21:00" },
+      "thursday": { "opens": "08:00", "closes": "21:00" },
+      "friday": { "opens": "08:00", "closes": "22:00" },
+      "saturday": { "opens": "08:00", "closes": "22:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "4",
+    "category": "lanches",
+    "name": "Burger King - Moema",
+    "image": "https://i.ibb.co/dJ3qR8xm/burger-king.png",
+    "rating": 5.0,
+    "address": "Av. Moema, 1000, São Paulo, SP",
+    "cnpj": "12.345.678/0001-90",
+    "delivery_fees": [{ "city": "São Paulo", "value": 10.0 }],
+    "delivery_time_in_minutes": { "min": 20, "max": 40 },
+    "min_purchase_value": 20.0,
+    "payment_methods": {
+      "app": ["Nubank", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "10:00", "closes": "22:00" },
+      "tuesday": { "opens": "10:00", "closes": "22:00" },
+      "wednesday": { "opens": "10:00", "closes": "22:00" },
+      "thursday": { "opens": "10:00", "closes": "22:00" },
+      "friday": { "opens": "10:00", "closes": "23:00" },
+      "saturday": { "opens": "10:00", "closes": "23:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "5",
+    "category": "lanches",
+    "name": "McDonald's - Paulista",
+    "image": "https://i.ibb.co/bjpHRT9s/mcdonalds.png",
+    "rating": 4.5,
+    "address": "Rua da Paulista, 1300, São Paulo, SP",
+    "cnpj": "98.765.432/0001-10",
+    "delivery_fees": [{ "city": "São Paulo", "value": 8.0 }],
+    "delivery_time_in_minutes": { "min": 15, "max": 30 },
+    "min_purchase_value": 15.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix"],
+      "cash": ["Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "09:00", "closes": "22:00" },
+      "tuesday": { "opens": "09:00", "closes": "22:00" },
+      "wednesday": { "opens": "09:00", "closes": "22:00" },
+      "thursday": { "opens": "09:00", "closes": "22:00" },
+      "friday": { "opens": "09:00", "closes": "23:00" },
+      "saturday": { "opens": "09:00", "closes": "23:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "6",
+    "name": "Pizza Hut",
+    "category": "pizza",
+    "image": "https://i.ibb.co/dwBv2B4p/pizza-hut.png",
+    "rating": 4.6,
+    "address": "Avenida Brigadeiro Faria Lima, 1800, São Paulo, SP",
+    "cnpj": "12.123.456/0001-75",
+    "delivery_fees": [{ "city": "São Paulo", "value": 12.0 }],
+    "delivery_time_in_minutes": { "min": 30, "max": 50 },
+    "min_purchase_value": 25.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "11:00", "closes": "23:00" },
+      "tuesday": { "opens": "11:00", "closes": "23:00" },
+      "wednesday": { "opens": "11:00", "closes": "23:00" },
+      "thursday": { "opens": "11:00", "closes": "23:00" },
+      "friday": { "opens": "11:00", "closes": "00:00" },
+      "saturday": { "opens": "11:00", "closes": "00:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "7",
+    "category": "pizza",
+    "name": "Domino's Pizza",
+    "image": "https://i.ibb.co/Ld7YsCFm/dominos-pizza.png",
+    "rating": 4.7,
+    "address": "Rua dos Três Irmãos, 500, São Paulo, SP",
+    "cnpj": "98.123.456/0001-33",
+    "delivery_fees": [{ "city": "São Paulo", "value": 15.0 }],
+    "delivery_time_in_minutes": { "min": 20, "max": 40 },
+    "min_purchase_value": 30.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "10:30", "closes": "23:30" },
+      "tuesday": { "opens": "10:30", "closes": "23:30" },
+      "wednesday": { "opens": "10:30", "closes": "23:30" },
+      "thursday": { "opens": "10:30", "closes": "23:30" },
+      "friday": { "opens": "10:30", "closes": "00:00" },
+      "saturday": { "opens": "10:30", "closes": "00:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "8",
+    "category": "doce",
+    "name": "Havanna",
+    "image": "https://i.ibb.co/Z64YXMNq/havanna.jpg",
+    "rating": 4.8,
+    "address": "Rua dos Três Irmãos, 500, São Paulo, SP",
+    "cnpj": "23.456.789/0001-30",
+    "delivery_fees": [{ "city": "São Paulo", "value": 5.0 }],
+    "delivery_time_in_minutes": { "min": 10, "max": 20 },
+    "min_purchase_value": 12.0,
+    "payment_methods": {
+      "app": ["Online Payment"],
+      "cash": ["Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery"],
+    "establishment_hours": {
+      "monday": { "opens": "09:00", "closes": "20:00" },
+      "tuesday": { "opens": "09:00", "closes": "20:00" },
+      "wednesday": { "opens": "09:00", "closes": "20:00" },
+      "thursday": { "opens": "09:00", "closes": "20:00" },
+      "friday": { "opens": "09:00", "closes": "22:00" },
+      "saturday": { "opens": "09:00", "closes": "22:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "9",
+    "category": "doce",
+    "name": "Cacau Show",
+    "image": "https://i.ibb.co/vvvGnb5h/cacau-show.png",
+    "rating": 4.7,
+    "address": "Av. Brigadeiro Faria Lima, 800, São Paulo, SP",
+    "cnpj": "34.567.890/0001-50",
+    "delivery_fees": [{ "city": "São Paulo", "value": 7.0 }],
+    "delivery_time_in_minutes": { "min": 15, "max": 30 },
+    "min_purchase_value": 15.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "10:00", "closes": "20:00" },
+      "tuesday": { "opens": "10:00", "closes": "20:00" },
+      "wednesday": { "opens": "10:00", "closes": "20:00" },
+      "thursday": { "opens": "10:00", "closes": "20:00" },
+      "friday": { "opens": "10:00", "closes": "22:00" },
+      "saturday": { "opens": "10:00", "closes": "22:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "10",
+    "category": "pastel",
+    "name": "Pastelaria do Mané",
+    "image": "https://i.ibb.co/JF2ZLqRR/pastelaria-do-mane.jpg",
+    "rating": 4.3,
+    "address": "Rua do Riacho, 1500, São Paulo, SP",
+    "cnpj": "45.678.910/0001-40",
+    "delivery_fees": [{ "city": "São Paulo", "value": 6.0 }],
+    "delivery_time_in_minutes": { "min": 15, "max": 30 },
+    "min_purchase_value": 12.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery"],
+    "establishment_hours": {
+      "monday": { "opens": "08:00", "closes": "20:00" },
+      "tuesday": { "opens": "08:00", "closes": "20:00" },
+      "wednesday": { "opens": "08:00", "closes": "20:00" },
+      "thursday": { "opens": "08:00", "closes": "20:00" },
+      "friday": { "opens": "08:00", "closes": "22:00" },
+      "saturday": { "opens": "08:00", "closes": "22:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "11",
+    "category": "pastel",
+    "name": "Pastelaria São João",
+    "image": "",
+    "rating": 4.4,
+    "address": "Rua das Orquídeas, 2000, São Paulo, SP",
+    "cnpj": "56.789.012/0001-60",
+    "delivery_fees": [{ "city": "São Paulo", "value": 7.5 }],
+    "delivery_time_in_minutes": { "min": 10, "max": 25 },
+    "min_purchase_value": 10.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "09:00", "closes": "19:00" },
+      "tuesday": { "opens": "09:00", "closes": "19:00" },
+      "wednesday": { "opens": "09:00", "closes": "19:00" },
+      "thursday": { "opens": "09:00", "closes": "19:00" },
+      "friday": { "opens": "09:00", "closes": "21:00" },
+      "saturday": { "opens": "09:00", "closes": "21:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "12",
+    "category": "padaria",
+    "name": "Padaria Bella Paulista",
+    "image": "https://i.ibb.co/N6VZpYgS/padaria-bella-paulista.webp",
+    "rating": 4.5,
+    "address": "Av. Paulista, 1000, São Paulo, SP",
+    "cnpj": "12.345.678/0001-90",
+    "delivery_fees": [{ "city": "São Paulo", "value": 7.0 }],
+    "delivery_time_in_minutes": { "min": 15, "max": 30 },
+    "min_purchase_value": 10.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "06:00", "closes": "20:00" },
+      "tuesday": { "opens": "06:00", "closes": "20:00" },
+      "wednesday": { "opens": "06:00", "closes": "20:00" },
+      "thursday": { "opens": "06:00", "closes": "20:00" },
+      "friday": { "opens": "06:00", "closes": "22:00" },
+      "saturday": { "opens": "06:00", "closes": "22:00" },
+      "sunday": { "opens": "07:00", "closes": "14:00" }
+    }
+  },
+  {
+    "id": "13",
+    "category": "padaria",
+    "name": "Padaria Doce Vida",
+    "image": "",
+    "rating": 4.3,
+    "address": "Rua dos Três Irmãos, 500, São Paulo, SP",
+    "cnpj": "23.456.789/0001-10",
+    "delivery_fees": [{ "city": "São Paulo", "value": 6.0 }],
+    "delivery_time_in_minutes": { "min": 10, "max": 25 },
+    "min_purchase_value": 12.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "06:30", "closes": "19:30" },
+      "tuesday": { "opens": "06:30", "closes": "19:30" },
+      "wednesday": { "opens": "06:30", "closes": "19:30" },
+      "thursday": { "opens": "06:30", "closes": "19:30" },
+      "friday": { "opens": "06:30", "closes": "21:00" },
+      "saturday": { "opens": "06:30", "closes": "21:00" },
+      "sunday": { "opens": "07:00", "closes": "14:00" }
+    }
+  },
+  {
+    "id": "14",
+    "category": "comida japonesa",
+    "name": "Temaki San",
+    "image": "https://i.ibb.co/Y7GcszYJ/temaki-san.jpg",
+    "rating": 4.7,
+    "address": "Rua dos Três Irmãos, 1000, São Paulo, SP",
+    "cnpj": "34.567.890/0001-20",
+    "delivery_fees": [{ "city": "São Paulo", "value": 8.0 }],
+    "delivery_time_in_minutes": { "min": 20, "max": 40 },
+    "min_purchase_value": 25.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "11:00", "closes": "22:00" },
+      "tuesday": { "opens": "11:00", "closes": "22:00" },
+      "wednesday": { "opens": "11:00", "closes": "22:00" },
+      "thursday": { "opens": "11:00", "closes": "22:00" },
+      "friday": { "opens": "11:00", "closes": "23:00" },
+      "saturday": { "opens": "11:00", "closes": "23:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "15",
+    "category": "comida japonesa",
+    "name": "Kinoshita",
+    "image": "https://i.ibb.co/8LpGdHJc/kinoshita.jpg",
+    "rating": 4.8,
+    "address": "Rua dos Três Irmãos, 1200, São Paulo, SP",
+    "cnpj": "45.678.910/0001-30",
+    "delivery_fees": [{ "city": "São Paulo", "value": 9.0 }],
+    "delivery_time_in_minutes": { "min": 30, "max": 50 },
+    "min_purchase_value": 30.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "12:00", "closes": "22:00" },
+      "tuesday": { "opens": "12:00", "closes": "22:00" },
+      "wednesday": { "opens": "12:00", "closes": "22:00" },
+      "thursday": { "opens": "12:00", "closes": "22:00" },
+      "friday": { "opens": "12:00", "closes": "23:00" },
+      "saturday": { "opens": "12:00", "closes": "23:00" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "16",
+    "category": "burger",
+    "name": "Sempre fechado 1",
+    "image": "https://i.ibb.co/8LpGdHJc/kinoshita.jpg",
+    "rating": 2.1,
+    "address": "Rua dos Três Irmãos, 1200, São Paulo, SP",
+    "cnpj": "45.678.910/0001-30",
+    "delivery_fees": [{ "city": "São Paulo", "value": 9.0 }],
+    "delivery_time_in_minutes": { "min": 30, "max": 50 },
+    "min_purchase_value": 30.0,
+    "payment_methods": {
+      "app": ["Nubank", "Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "closed", "closes": "closed" },
+      "tuesday": { "opens": "closed", "closes": "closed" },
+      "wednesday": { "opens": "closed", "closes": "closed" },
+      "thursday": { "opens": "closed", "closes": "closed" },
+      "friday": { "opens": "closed", "closes": "closed" },
+      "saturday": { "opens": "closed", "closes": "closed" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  },
+  {
+    "id": "17",
+    "category": "burger",
+    "name": "Sempre fechado 2",
+    "image": "https://i.ibb.co/bjpHRT9s/mcdonalds.png",
+    "rating": 1.5,
+    "address": "Rua da Consolação, 1300, São Paulo, SP",
+    "cnpj": "98.765.432/0001-10",
+    "delivery_fees": [{ "city": "São Paulo", "value": 8.0 }],
+    "delivery_time_in_minutes": { "min": 15, "max": 30 },
+    "min_purchase_value": 15.0,
+    "payment_methods": {
+      "app": ["Pix", "Online Payment"],
+      "cash": ["Cash", "Credit Card", "Debit Card"]
+    },
+    "delivery_types": ["Delivery", "Establishment"],
+    "establishment_hours": {
+      "monday": { "opens": "closed", "closes": "closed" },
+      "tuesday": { "opens": "closed", "closes": "closed" },
+      "wednesday": { "opens": "closed", "closes": "closed" },
+      "thursday": { "opens": "closed", "closes": "closed" },
+      "friday": { "opens": "closed", "closes": "closed" },
+      "saturday": { "opens": "closed", "closes": "closed" },
+      "sunday": { "opens": "closed", "closes": "closed" }
+    }
+  }
+]
