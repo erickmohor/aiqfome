@@ -19,7 +19,7 @@ export default function EstablishmentItem({
 
   return (
     <Link
-      href="/estabelecimentos/matsuri-concept"
+      href={`/estabelecimentos/${establishment.tag}`}
       className="bg-neutrals-50 flex items-center gap-3 overflow-hidden rounded-lg sm:max-w-[275px] sm:min-w-[275px]"
     >
       <div className="border-neutrals-100 relative flex h-[72px] min-w-[72px] items-center justify-center rounded-tl-lg rounded-bl-lg border-[1px]">
