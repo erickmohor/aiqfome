@@ -2,12 +2,14 @@ import { OptionCardHeader } from "./option-card-header";
 import { OptionItemsCheckbox } from "./option-items-checkbox";
 import { OptionItemsQuantity } from "./option-items-quantity";
 import { OptionItemsRadio } from "./option-items-radio";
+import { IOption } from "./options";
 
-export interface OptionItemProps {
+export interface IOptionItem {
+  id: string;
   name: string;
   price?: number;
   discountPercentage?: number;
-  isAdditionalOption?: boolean;
+  isAdditionalItem?: boolean;
 }
 
 export interface CartProductItemProps {
@@ -16,21 +18,13 @@ export interface CartProductItemProps {
   price: number;
 }
 
-interface OptionCardProps {
-  title: string;
-  minQuantity?: number;
-  maxQuantity?: number;
-  type: "checkbox" | "radio" | "quantity";
-  options: OptionItemProps[];
-}
-
 export function OptionCard({
   title,
   minQuantity,
   maxQuantity,
   type,
-  options,
-}: OptionCardProps) {
+  optionsItems,
+}: IOption) {
   return (
     <div className="p-4">
       <OptionCardHeader
@@ -40,9 +34,9 @@ export function OptionCard({
       />
 
       <div className="mt-5">
-        {type === "radio" && <OptionItemsRadio options={options} />}
-        {type === "checkbox" && <OptionItemsCheckbox options={options} />}
-        {type === "quantity" && <OptionItemsQuantity options={options} />}
+        {type === "radio" && <OptionItemsRadio items={optionsItems} />}
+        {type === "checkbox" && <OptionItemsCheckbox items={optionsItems} />}
+        {type === "quantity" && <OptionItemsQuantity items={optionsItems} />}
       </div>
     </div>
   );
