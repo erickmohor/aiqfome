@@ -1,18 +1,20 @@
 "use client";
 import { formatCurrency } from "../_helpers/price";
-import { CartProductItemProps, OptionItemProps } from "./option-card";
+import { CartProductItemProps, IOptionItem } from "./option-card";
 
 import { useState } from "react";
 import { CircleMinus, CirclePlus } from "lucide-react";
 
 interface OptionItemsQuantityProps {
-  options: OptionItemProps[];
+  items: IOptionItem[];
 }
 
-export function OptionItemsQuantity({ options }: OptionItemsQuantityProps) {
-  const [items, setItems] = useState<CartProductItemProps[] | []>([]);
+export function OptionItemsQuantity({ items }: OptionItemsQuantityProps) {
+  const [selectedItems, setSelectedItems] = useState<
+    CartProductItemProps[] | []
+  >([]);
 
-  if (!options || options?.length < 1) return;
+  if (!items || items?.length < 1) return;
 
   const handleOnChangeQuantity = (
     name: string,
@@ -23,20 +25,22 @@ export function OptionItemsQuantity({ options }: OptionItemsQuantityProps) {
     if (action === "increase") newQuantity = currentQuantity + 1;
     if (action === "decrease") newQuantity = currentQuantity - 1;
 
-    const isItemAlreadyOnTheList = items?.some((item) => item.name === name);
+    const isItemAlreadyOnTheList = selectedItems?.some(
+      (item) => item.name === name,
+    );
 
     if (action === "decrease" && currentQuantity < 1 && !isItemAlreadyOnTheList)
       return;
 
     if (isItemAlreadyOnTheList) {
       if (action === "decrease" && newQuantity < 1) {
-        return setItems((prev) => {
+        return setSelectedItems((prev) => {
           const newItems = prev.filter((item) => item.name !== name);
           return newItems ?? [];
         });
       }
 
-      return setItems((prev) =>
+      return setSelectedItems((prev) =>
         prev.map((item) => {
           if (item.name == name) {
             item.quantity = newQuantity;
@@ -46,7 +50,7 @@ export function OptionItemsQuantity({ options }: OptionItemsQuantityProps) {
       );
     }
 
-    setItems((currentItems) => [
+    setSelectedItems((currentItems) => [
       ...currentItems,
       { name, quantity: newQuantity, price: 0 },
     ]);
@@ -54,21 +58,23 @@ export function OptionItemsQuantity({ options }: OptionItemsQuantityProps) {
 
   return (
     <div className="space-y-3 pr-4 pl-1">
-      {options.map((option) => {
+      {items.map((item) => {
         let quantity = 0;
-        const item = items?.find((item) => item.name === option.name);
-        if (item?.quantity) quantity = item.quantity;
+        const selectedItem = selectedItems?.find(
+          (selItem) => selItem.name === item.name,
+        );
+        if (selectedItem?.quantity) quantity = selectedItem.quantity;
 
         return (
           <div
-            key={option.name}
+            key={item.name}
             className="flex items-center justify-between gap-3 py-1"
           >
             <div className="flex items-center space-x-2">
               <div className="flex items-center gap-1">
                 <button
                   onClick={() =>
-                    handleOnChangeQuantity(option.name, quantity, "decrease")
+                    handleOnChangeQuantity(item.name, quantity, "decrease")
                   }
                 >
                   <CircleMinus
@@ -81,7 +87,7 @@ export function OptionItemsQuantity({ options }: OptionItemsQuantityProps) {
                 </span>
                 <button
                   onClick={() =>
-                    handleOnChangeQuantity(option.name, quantity, "increase")
+                    handleOnChangeQuantity(item.name, quantity, "increase")
                   }
                 >
                   <CirclePlus
@@ -92,15 +98,15 @@ export function OptionItemsQuantity({ options }: OptionItemsQuantityProps) {
               </div>
 
               <span className="text-light text-sm font-semibold">
-                {option.name}
+                {item.name}
               </span>
             </div>
 
             <div className="flex items-center space-x-2">
-              {option.price && (
+              {item.price && (
                 <span className="text-sm font-bold text-purple-500">
-                  {option.isAdditionalOption && "+"}
-                  {formatCurrency(option.price)}
+                  {item.isAdditionalItem && "+"}
+                  {formatCurrency(item.price)}
                 </span>
               )}
             </div>

@@ -1,15 +1,15 @@
 "use client";
 import { formatCurrency } from "../_helpers/price";
-import { OptionItemProps } from "./option-card";
+import { IOptionItem } from "./option-card";
 
 import { Checkbox } from "./ui/checkbox";
 
 interface OptionItemsCheckboxProps {
-  options: OptionItemProps[];
+  items: IOptionItem[];
 }
 
-export function OptionItemsCheckbox({ options }: OptionItemsCheckboxProps) {
-  if (!options || options?.length < 1) return;
+export function OptionItemsCheckbox({ items }: OptionItemsCheckboxProps) {
+  if (!items || items?.length < 1) return;
 
   const handleCheckedChange = (name: string, checked: string | boolean) => {
     console.log("name: ", name);
@@ -18,29 +18,29 @@ export function OptionItemsCheckbox({ options }: OptionItemsCheckboxProps) {
 
   return (
     <div className="space-y-3 pr-4 pl-1">
-      {options.map((option) => {
+      {items.map((item) => {
         return (
           <div
-            key={option.name}
+            key={item.name}
             className="flex items-center justify-between gap-3 py-1"
           >
             <div className="flex items-center space-x-2">
               <Checkbox
                 onCheckedChange={(checked) =>
-                  handleCheckedChange(option.name, checked)
+                  handleCheckedChange(item.name, checked)
                 }
               />
 
               <span className="text-light text-sm font-normal">
-                {option.name}
+                {item.name}
               </span>
             </div>
 
             <div className="flex items-center space-x-2">
-              {option.price && (
+              {item.price && (
                 <span className="text-sm font-bold text-purple-500">
-                  {option.isAdditionalOption && "+"}
-                  {formatCurrency(option.price)}
+                  {item.isAdditionalItem && "+"}
+                  {formatCurrency(item.price)}
                 </span>
               )}
             </div>
