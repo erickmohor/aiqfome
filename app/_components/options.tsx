@@ -1,167 +1,33 @@
-import { ButtonAddToTicket } from "@/app/_components/button-add-to-ticket";
-import { OptionCard } from "@/app/_components/option-card";
-import { Textarea } from "@/app/_components/ui/textarea";
-import Image from "next/image";
+import { IOptionItem } from "@/app/_components/option-card";
 import { OptionsFooter } from "./options-footer";
+import { IProduct } from "./product-card";
+import { OptionsHeader } from "./options-header";
+import { OptionsForm } from "./options-form";
 
-export function Options() {
+export interface IOption {
+  id: string;
+  productId: string;
+  title: string;
+  minQuantity?: number;
+  maxQuantity?: number;
+  type: "checkbox" | "radio" | "quantity";
+  optionsItems: IOptionItem[];
+}
+
+interface OptionsProps {
+  product: IProduct;
+}
+
+export function Options({ product }: OptionsProps) {
   return (
     <div className="flex h-full flex-col overflow-auto">
       <div className="sm:bg-neutrals-100 flex flex-col items-center">
-        <main className="bg-white">
-          <Image
-            alt="Imagem da comida japonesa"
-            src="/mockups-images/burger.jpg"
-            height={0}
-            width={0}
-            className="object-fit h-[195px] w-full sm:object-cover"
-            sizes="100%"
-            quality={100}
-          />
-
-          <div className="p-4 pb-6">
-            <div className="space-y-1.5">
-              <h1 className="text-neutrals-700 text-xl font-bold">
-                Ceviche de salmão
-              </h1>
-              <div className="flex items-center gap-2">
-                <h2 className="text-light text-sm font-extrabold">
-                  a partir de{" "}
-                </h2>
-                <h2 className="text-lg font-extrabold text-purple-500">
-                  R$ 19,90
-                </h2>
-              </div>
-              <p className="text-light text-sm font-semibold">
-                salmão temperado com limão, cebola e pimenta
-              </p>
-            </div>
-
-            <div className="mt-4 flex items-center justify-between">
-              <div>
-                <p className="text-neutrals-700 text-base font-bold">
-                  quantos?
-                </p>
-                <div className="mt-1.5 flex items-center gap-1">
-                  <span className="text-light text-sm font-semibold">
-                    total
-                  </span>
-                  <span className="text-neutrals-700 text-sm font-bold">
-                    R$19,90
-                  </span>
-                </div>
-              </div>
-              <ButtonAddToTicket />
-            </div>
-          </div>
+        <main className="w-full bg-white">
+          <OptionsHeader product={product} />
 
           <div className="bg-neutrals-100 h-1" />
 
-          <OptionCard
-            title="qual o tamanho?"
-            minQuantity={1}
-            type="radio"
-            options={[
-              {
-                name: "médio",
-                price: 20.0,
-                discountPercentage: 10,
-              },
-              {
-                name: "grande",
-                price: 28.9,
-              },
-            ]}
-          />
-
-          <div className="bg-neutrals-100 h-1" />
-
-          <OptionCard
-            title="acompanhamentos"
-            minQuantity={1}
-            maxQuantity={2}
-            type="checkbox"
-            options={[
-              { name: "shoyu" },
-              { name: "gengibre" },
-              { name: "wasabi" },
-              { name: "sem acompanhamentos" },
-            ]}
-          />
-
-          <div className="bg-neutrals-100 h-1" />
-
-          <OptionCard
-            title="vai querer bebida?"
-            type="quantity"
-            options={[
-              { name: "coca-cola", price: 5.0, isAdditionalOption: true },
-              { name: "fanta laranja", price: 5.0, isAdditionalOption: true },
-              {
-                name: "guaraná antárctica",
-                price: 5.0,
-                isAdditionalOption: true,
-              },
-              {
-                name: "suco prats laranja",
-                price: 6.0,
-                isAdditionalOption: true,
-              },
-              { name: "água sem gás", price: 3.0, isAdditionalOption: true },
-            ]}
-          />
-
-          <div className="bg-neutrals-100 h-1" />
-
-          <OptionCard
-            title="precisa de talher?"
-            maxQuantity={1}
-            type="radio"
-            options={[
-              {
-                name: "hashi",
-              },
-              {
-                name: "garfo e faca descartável",
-                price: 1.0,
-                isAdditionalOption: true,
-              },
-            ]}
-          />
-
-          <div className="bg-neutrals-100 h-1" />
-
-          <OptionCard
-            title="mais alguma coisa?"
-            maxQuantity={2}
-            type="checkbox"
-            options={[
-              {
-                name: "biscoito da sorte",
-                price: 2.0,
-                isAdditionalOption: true,
-              },
-              {
-                name: "rolinho primavera",
-                price: 8.0,
-                isAdditionalOption: true,
-              },
-              {
-                name: "guioza",
-                price: 6.0,
-                isAdditionalOption: true,
-              },
-            ]}
-          />
-
-          <div className="bg-neutrals-100 h-1" />
-
-          <div className="mb-11 p-4 pb-6">
-            <Textarea
-              placeholder="alguma observação do item? ex: tirar algum ingrediente, ponto do prato
-texto do input (opcional)"
-            />
-          </div>
+          <OptionsForm options={product.options} />
         </main>
       </div>
       <OptionsFooter />
