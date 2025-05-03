@@ -34,7 +34,9 @@ export function OptionCard({
       />
 
       <div className="mt-5">
-        {type === "radio" && <OptionItemsRadio items={optionsItems} />}
+        {(type === "radio" || type === "size") && (
+          <OptionItemsRadio items={optionsItems} />
+        )}
         {type === "checkbox" && <OptionItemsCheckbox items={optionsItems} />}
         {type === "quantity" && <OptionItemsQuantity items={optionsItems} />}
       </div>

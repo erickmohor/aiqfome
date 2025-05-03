@@ -6,7 +6,7 @@ export const options: IOption[] = [
     productId: "0001",
     title: "qual o tamanho?",
     minQuantity: 1,
-    type: "radio",
+    type: "size",
     optionsItems: [
       {
         id: "00001",

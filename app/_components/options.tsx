@@ -10,7 +10,7 @@ export interface IOption {
   title: string;
   minQuantity?: number;
   maxQuantity?: number;
-  type: "checkbox" | "radio" | "quantity";
+  type: "size" | "checkbox" | "radio" | "quantity";
   optionsItems: IOptionItem[];
 }
 
