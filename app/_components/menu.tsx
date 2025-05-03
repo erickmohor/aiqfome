@@ -1,15 +1,24 @@
-import { CategoryCard } from "./category-card";
+import { CategoryCard, ICategory } from "./category-card";
 
-export function Menu() {
+interface MenuProps {
+  categories: ICategory[] | [];
+}
+
+export function Menu({ categories }: MenuProps) {
+  if (!categories || categories.length < 1) return;
+
   return (
     <div>
-      <CategoryCard initOpen />
-      <div className="bg-neutrals-100 h-1" />
-      <CategoryCard />
-      <div className="bg-neutrals-100 h-1" />
-      <CategoryCard />
-      <div className="bg-neutrals-100 h-1" />
-      <CategoryCard />
+      {categories.map((category, index) => {
+        return (
+          <div key={category.id}>
+            <CategoryCard initOpen={index === 0} category={category} />
+            {index !== categories.length - 1 && (
+              <div className="bg-neutrals-100 h-1" />
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
