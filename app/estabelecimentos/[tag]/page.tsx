@@ -4,6 +4,7 @@ import Header from "@/app/_components/header";
 import { Menu } from "@/app/_components/menu";
 import { checkIfEstablishmentIsOpenNow, DayOfWeek } from "@/app/_helpers/date";
 import { formatCurrency } from "@/app/_helpers/price";
+import { categoryService } from "@/app/_services/category";
 import { establishmentService } from "@/app/_services/establishment";
 import { format } from "date-fns";
 import { ChevronRight, Heart, Share2, Star } from "lucide-react";
@@ -25,6 +26,11 @@ export default async function EstablishmentPage({
     tag: establishmentTag,
   });
 
+  const { categories } =
+    await categoryService.getCategoriesAndProductsFromEstablishment({
+      establishmentId: establishment.id,
+    });
+
   if (!establishment) {
     return notFound();
   }
@@ -36,6 +42,13 @@ export default async function EstablishmentPage({
 
   const formattedClosingTime =
     establishment.establishment_hours[dayOfWeek].closes;
+
+  let formattedOpeningHours =
+    establishment.establishment_hours[dayOfWeek].opens;
+
+  if (formattedOpeningHours === "closed") {
+    formattedOpeningHours = "";
+  }
 
   const isOpen = checkIfEstablishmentIsOpenNow({
     formattedOpeningHours: establishment.establishment_hours[dayOfWeek].opens,
@@ -112,7 +125,10 @@ export default async function EstablishmentPage({
               className={`font-bold ${isOpen ? "text-green-500" : "text-red-500"}`}
             >
               {isOpen && `fecha às ${formattedClosingTime}`}
-              {!isOpen && "fechado"}
+              {!isOpen &&
+                formattedOpeningHours &&
+                `abre às ${formattedOpeningHours}`}
+              {!isOpen && !formattedOpeningHours && "fechado"}
             </span>
           </div>
 
@@ -124,7 +140,7 @@ export default async function EstablishmentPage({
         </div>
 
         <div className="mt-4 w-full max-w-[600px]">
-          <Menu />
+          <Menu categories={categories} />
         </div>
       </main>
 
