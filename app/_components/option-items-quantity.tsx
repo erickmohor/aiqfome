@@ -1,15 +1,15 @@
 "use client";
 import { formatCurrency } from "../_helpers/price";
-import { CartProductItemProps, ItemOptionProps } from "./product-item";
+import { CartProductItemProps, OptionItemProps } from "./option-card";
 
 import { useState } from "react";
 import { CircleMinus, CirclePlus } from "lucide-react";
 
-interface ItemOptionsQuantityProps {
-  options: ItemOptionProps[];
+interface OptionItemsQuantityProps {
+  options: OptionItemProps[];
 }
 
-export function ItemOptionsQuantity({ options }: ItemOptionsQuantityProps) {
+export function OptionItemsQuantity({ options }: OptionItemsQuantityProps) {
   const [items, setItems] = useState<CartProductItemProps[] | []>([]);
 
   if (!options || options?.length < 1) return;

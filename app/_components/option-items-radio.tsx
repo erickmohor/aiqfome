@@ -1,14 +1,14 @@
 "use client";
 import { CircleDollarSign } from "lucide-react";
 import { calculateProductTotalPrice, formatCurrency } from "../_helpers/price";
-import { ItemOptionProps } from "./product-item";
+import { OptionItemProps } from "./option-card";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 
-interface ItemOptionsRadioProps {
-  options: ItemOptionProps[];
+interface OptionItemsRadioProps {
+  options: OptionItemProps[];
 }
 
-export function ItemOptionsRadio({ options }: ItemOptionsRadioProps) {
+export function OptionItemsRadio({ options }: OptionItemsRadioProps) {
   if (!options || options?.length < 1) return;
 
   const handleOptionChange = (value: string) => {

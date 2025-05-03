@@ -1,15 +1,15 @@
-import { ProductListByCategory } from "./product-list-by-category";
+import { CategoryCard } from "./category-card";
 
 export function Menu() {
   return (
     <div>
-      <ProductListByCategory initOpen />
+      <CategoryCard initOpen />
       <div className="bg-neutrals-100 h-1" />
-      <ProductListByCategory />
+      <CategoryCard />
       <div className="bg-neutrals-100 h-1" />
-      <ProductListByCategory />
+      <CategoryCard />
       <div className="bg-neutrals-100 h-1" />
-      <ProductListByCategory />
+      <CategoryCard />
     </div>
   );
 }

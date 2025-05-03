@@ -1,14 +1,14 @@
 "use client";
 import { formatCurrency } from "../_helpers/price";
-import { ItemOptionProps } from "./product-item";
+import { OptionItemProps } from "./option-card";
 
 import { Checkbox } from "./ui/checkbox";
 
-interface ItemOptionsCheckboxProps {
-  options: ItemOptionProps[];
+interface OptionItemsCheckboxProps {
+  options: OptionItemProps[];
 }
 
-export function ItemOptionsCheckbox({ options }: ItemOptionsCheckboxProps) {
+export function OptionItemsCheckbox({ options }: OptionItemsCheckboxProps) {
   if (!options || options?.length < 1) return;
 
   const handleCheckedChange = (name: string, checked: string | boolean) => {

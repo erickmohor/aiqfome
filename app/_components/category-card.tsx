@@ -7,15 +7,13 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible";
-import { ProductListItem } from "./product-list-item";
+import { ProductCard } from "./product-card";
 
-interface ProductListByCategoryProps {
+interface CategoryCardProps {
   initOpen?: boolean;
 }
 
-export function ProductListByCategory({
-  initOpen = false,
-}: ProductListByCategoryProps) {
+export function CategoryCard({ initOpen = false }: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const isHighlight = true;
@@ -51,8 +49,8 @@ export function ProductListByCategory({
             "text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 mt-6 ml-2 space-y-6 outline-none",
           )}
         >
-          <ProductListItem />
-          <ProductListItem />
+          <ProductCard />
+          <ProductCard />
         </CollapsibleContent>
       </Collapsible>
     </div>
