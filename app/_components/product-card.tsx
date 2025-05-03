@@ -7,15 +7,19 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
-import { Options } from "./options";
+import { IOption, Options } from "./options";
 
 export interface IProduct {
   id: string;
+  establishmentId: string;
   name: string;
   description: string;
+  image: string;
+  category: string;
   price: number;
   discountPercentage?: number;
   priceIsNotFixed?: boolean;
+  options: IOption[];
 }
 
 interface ProductCardProps {
@@ -70,7 +74,8 @@ export function ProductCard({ product }: ProductCardProps) {
         <SheetHeader>
           <SheetTitle></SheetTitle>
         </SheetHeader>
-        <Options />
+
+        <Options product={product} />
       </SheetContent>
     </Sheet>
   );
