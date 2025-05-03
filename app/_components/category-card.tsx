@@ -9,7 +9,7 @@ import {
 } from "./ui/collapsible";
 import { IProduct, ProductCard } from "./product-card";
 
-interface ICategory {
+export interface ICategory {
   id: string;
   name: string;
   description?: string;
