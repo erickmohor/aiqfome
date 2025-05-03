@@ -3,67 +3,74 @@ import { calculateProductTotalPrice, formatCurrency } from "../_helpers/price";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
+import { Options } from "./options";
 
-export function ProductCard() {
-  const price = 13.99;
-  const discountPercentage = 30;
-  const priceIsNotFixed = true;
+export interface IProduct {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  discountPercentage?: number;
+  priceIsNotFixed?: boolean;
+}
 
+interface ProductCardProps {
+  product: IProduct;
+}
+
+export function ProductCard({ product }: ProductCardProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="flex cursor-pointer justify-between gap-4 text-left">
-          <div>
-            <h1 className="text-neutrals-900 text-sm font-semibold">Mix</h1>
+        <button className="flex w-full cursor-pointer justify-between gap-4 text-left">
+          <div className="flex flex-1 flex-col">
+            <h1 className="text-neutrals-900 text-sm font-semibold">
+              {product.name}
+            </h1>
 
-            <p className="text-neutrals-500 text-xs">
-              Escolha 3 ingredientes: shimeji, alface americana, rúcula, pepino,
-              tomate seco, cream cheese, maionese, goiabada, banana, requeijão,
-              molho de maracujá, manga, maçã e morango.
-            </p>
+            <p className="text-neutrals-500 text-xs">{product.description}</p>
           </div>
 
           <div className="min-w-[3.75rem]">
-            {discountPercentage ? (
+            {product.discountPercentage ? (
               <div className="text-right">
                 <p className="text-light text-xs font-bold line-through">
-                  {formatCurrency(price)}
+                  {formatCurrency(product.price)}
                 </p>
                 <div className="flex items-center gap-0.5">
                   <CircleDollarSign size={12} className="text-green-500" />
                   <p className="text-sm font-bold text-green-500">
                     {formatCurrency(
-                      calculateProductTotalPrice({ price, discountPercentage }),
+                      calculateProductTotalPrice({
+                        price: product.price,
+                        discountPercentage: product.discountPercentage,
+                      }),
                     )}
                   </p>
                 </div>
               </div>
             ) : (
               <>
-                {priceIsNotFixed && (
+                {product.priceIsNotFixed && (
                   <p className="text-light text-xs font-bold">a partir de</p>
                 )}
                 <p className="text-sm font-bold text-purple-500">
-                  {formatCurrency(price)}
+                  {formatCurrency(product.price)}
                 </p>
               </>
             )}
           </div>
         </button>
       </SheetTrigger>
-      <SheetContent className="w-[90%] sm:w-[700px]">
+      <SheetContent className="w-full max-w-[420px] border-0 text-white sm:max-w-[420px]">
         <SheetHeader>
-          <SheetTitle>Are you absolutely sure?</SheetTitle>
-          <SheetDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </SheetDescription>
+          <SheetTitle></SheetTitle>
         </SheetHeader>
+        <Options />
       </SheetContent>
     </Sheet>
   );
