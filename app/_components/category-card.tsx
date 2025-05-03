@@ -7,16 +7,26 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible";
-import { ProductCard } from "./product-card";
+import { IProduct, ProductCard } from "./product-card";
+
+interface ICategory {
+  id: string;
+  name: string;
+  description?: string;
+  products: IProduct[];
+  isHighlight?: boolean;
+}
 
 interface CategoryCardProps {
   initOpen?: boolean;
+  category: ICategory;
 }
 
-export function CategoryCard({ initOpen = false }: CategoryCardProps) {
+export function CategoryCard({
+  initOpen = false,
+  category,
+}: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const isHighlight = true;
 
   useEffect(() => {
     setIsOpen(initOpen);
@@ -28,13 +38,15 @@ export function CategoryCard({ initOpen = false }: CategoryCardProps) {
         <div className="flex items-center justify-between gap-2">
           <div>
             <div className="flex items-center gap-1">
-              <h1 className="text-neutrals-900 text-base font-bold">Temakis</h1>
-              {isHighlight && (
+              <h1 className="text-neutrals-900 text-base font-bold">
+                {category.name}
+              </h1>
+              {category.isHighlight && (
                 <CircleDollarSign size={18} className="text-green-500" />
               )}
             </div>
             <p className="text-neutrals-500 text-xs font-semibold">
-              sushi em forma de cone com salmão e cream cheese
+              {category.description}
             </p>
           </div>
 
@@ -49,8 +61,15 @@ export function CategoryCard({ initOpen = false }: CategoryCardProps) {
             "text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 mt-6 ml-2 space-y-6 outline-none",
           )}
         >
-          <ProductCard />
-          <ProductCard />
+          {category.products.length > 0 ? (
+            category.products.map((product) => {
+              return <ProductCard key={product.id} product={product} />;
+            })
+          ) : (
+            <p className="text-light text-sm font-semibold italic">
+              Sem produtos
+            </p>
+          )}
         </CollapsibleContent>
       </Collapsible>
     </div>
