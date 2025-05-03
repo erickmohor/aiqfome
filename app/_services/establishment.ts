@@ -1,11 +1,12 @@
-import { addDays, format, isFuture, isPast, set, sub } from "date-fns";
+import { format } from "date-fns";
 import Establishments from "@/app/_mockups/establishments.json";
-import { DayOfWeek } from "../_helpers/date";
+import { checkIfEstablishmentIsOpenNow, DayOfWeek } from "../_helpers/date";
 
 export interface IEstablishment {
   id: string;
   category: string;
   name: string;
+  tag: string;
   image: string;
   rating: number;
   address: string;
@@ -48,17 +49,27 @@ export interface EstablishmentHoursDetailed {
   closes: string;
 }
 
-export interface IEstablishmentRequest {
+export interface IGetEstablishmentRequest {
+  tag: string;
+}
+
+export interface IGetEstablishmentResponse {
+  establishment: IEstablishment;
+}
+
+export interface IGetAllGroupedByStatusRequest {
   search?: string;
 }
 
-export interface IEstablishmentResponse {
+export interface IGetAllGroupedByStatusResponse {
   openEstablishments: IEstablishment[];
   closedEstablishments: IEstablishment[];
 }
 
 // This part is just to simulate an API and its logic
-async function apiGetAllGroupedByStatus({ search }: IEstablishmentRequest) {
+async function apiGetAllGroupedByStatus({
+  search,
+}: IGetAllGroupedByStatusRequest) {
   const openEstablishments = [];
   const closedEstablishments = [];
 
@@ -89,36 +100,10 @@ async function apiGetAllGroupedByStatus({ search }: IEstablishmentRequest) {
       continue;
     }
 
-    const formattedOpeningHours =
-      establishment.establishment_hours[dayOfWeek].opens;
-    const formattedClosingTime =
-      establishment.establishment_hours[dayOfWeek].closes;
-
-    const openingHour = Number(formattedOpeningHours.split(":")[0]);
-    const openingMinutes = Number(formattedOpeningHours.split(":")[1]);
-
-    const closingHour = Number(formattedClosingTime.split(":")[0]);
-    const closingMinutes = Number(formattedClosingTime.split(":")[1]);
-
-    const establishmentOpensAt = set(new Date(), {
-      hours: openingHour,
-      minutes: openingMinutes,
+    const establishmentIsOpen = checkIfEstablishmentIsOpenNow({
+      formattedOpeningHours: establishment.establishment_hours[dayOfWeek].opens,
+      formattedClosingTime: establishment.establishment_hours[dayOfWeek].closes,
     });
-    let establishmentClosesAt = set(new Date(), {
-      hours: closingHour,
-      minutes: closingMinutes,
-    });
-
-    if (closingHour === 0 && closingMinutes === 0) {
-      establishmentClosesAt = addDays(establishmentClosesAt, 1);
-    }
-
-    // When it is the same time, that time is neither in the past nor in the future.
-    // For this reason, it is necessary to subtract 1 minute
-    const opened = isPast(sub(establishmentOpensAt, { minutes: 1 }));
-    const isNotClosed = isFuture(sub(establishmentClosesAt, { minutes: 1 }));
-
-    const establishmentIsOpen = opened && isNotClosed;
 
     if (establishmentIsOpen) {
       openEstablishments.push(establishment);
@@ -134,16 +119,35 @@ async function apiGetAllGroupedByStatus({ search }: IEstablishmentRequest) {
   };
 }
 
+async function apiGetEstablishment({ tag }: IGetEstablishmentRequest) {
+  const dbEstablishments = Establishments;
+
+  const establishment = dbEstablishments.filter(
+    (establishment) => establishment.tag === tag,
+  );
+
+  return { establishment: establishment[0] };
+}
+
 ////////////////////////////////////////
 
 async function getAllGroupedByStatus({
   search,
-}: IEstablishmentRequest): Promise<IEstablishmentResponse> {
+}: IGetAllGroupedByStatusRequest): Promise<IGetAllGroupedByStatusResponse> {
   const data = await apiGetAllGroupedByStatus({ search });
 
   return data;
 }
 
-export const establishment = {
+async function getEstablishment({
+  tag,
+}: IGetEstablishmentRequest): Promise<IGetEstablishmentResponse> {
+  const data = await apiGetEstablishment({ tag });
+
+  return data;
+}
+
+export const establishmentService = {
   getAllGroupedByStatus,
+  getEstablishment,
 };
