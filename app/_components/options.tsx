@@ -1,30 +1,14 @@
 import { ButtonAddToTicket } from "@/app/_components/button-add-to-ticket";
-import Footer from "@/app/_components/footer";
-import Header from "@/app/_components/header";
-import { ProductItem } from "@/app/_components/product-item";
+import { OptionCard } from "@/app/_components/option-card";
 import { Textarea } from "@/app/_components/ui/textarea";
 import Image from "next/image";
+import { OptionsFooter } from "./options-footer";
 
-interface EstablishmentProductPageProps {
-  params: {
-    tag: string;
-    productTag: string;
-  };
-}
-
-export default async function EstablishmentProductPage({
-  params,
-}: EstablishmentProductPageProps) {
-  const { tag: establishmentTag, productTag } = await params;
-
-  console.log({ establishmentTag });
-  console.log({ productTag });
-
+export function Options() {
   return (
-    <div className="flex h-full flex-col">
-      <Header />
-      <div className="sm:bg-neutrals-100 sm:flex sm:flex-col sm:items-center">
-        <main className="max-w-[700px] flex-1 bg-white sm:w-[700px]">
+    <div className="flex h-full flex-col overflow-auto">
+      <div className="sm:bg-neutrals-100 flex flex-col items-center">
+        <main className="bg-white">
           <Image
             alt="Imagem da comida japonesa"
             src="/mockups-images/burger.jpg"
@@ -73,7 +57,7 @@ export default async function EstablishmentProductPage({
 
           <div className="bg-neutrals-100 h-1" />
 
-          <ProductItem
+          <OptionCard
             title="qual o tamanho?"
             minQuantity={1}
             type="radio"
@@ -92,7 +76,7 @@ export default async function EstablishmentProductPage({
 
           <div className="bg-neutrals-100 h-1" />
 
-          <ProductItem
+          <OptionCard
             title="acompanhamentos"
             minQuantity={1}
             maxQuantity={2}
@@ -107,7 +91,7 @@ export default async function EstablishmentProductPage({
 
           <div className="bg-neutrals-100 h-1" />
 
-          <ProductItem
+          <OptionCard
             title="vai querer bebida?"
             type="quantity"
             options={[
@@ -129,7 +113,7 @@ export default async function EstablishmentProductPage({
 
           <div className="bg-neutrals-100 h-1" />
 
-          <ProductItem
+          <OptionCard
             title="precisa de talher?"
             maxQuantity={1}
             type="radio"
@@ -147,7 +131,7 @@ export default async function EstablishmentProductPage({
 
           <div className="bg-neutrals-100 h-1" />
 
-          <ProductItem
+          <OptionCard
             title="mais alguma coisa?"
             maxQuantity={2}
             type="checkbox"
@@ -180,7 +164,7 @@ texto do input (opcional)"
           </div>
         </main>
       </div>
-      <Footer />
+      <OptionsFooter />
     </div>
   );
 }
