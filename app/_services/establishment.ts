@@ -147,7 +147,18 @@ async function getEstablishment({
   return data;
 }
 
+async function getEstablishmentById(id: string) {
+  const dbEstablishments = Establishments;
+
+  const establishment = dbEstablishments.find(
+    (establishment) => establishment.id === id,
+  );
+
+  return { establishment };
+}
+
 export const establishmentService = {
   getAllGroupedByStatus,
   getEstablishment,
+  getEstablishmentById,
 };
