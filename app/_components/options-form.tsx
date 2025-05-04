@@ -1,23 +1,16 @@
 import { OptionCard } from "@/app/_components/option-card";
 import { Textarea } from "@/app/_components/ui/textarea";
-import { IOption } from "./options";
+import { IProduct } from "./product-card";
 
 interface OptionsFormProps {
-  establishmentId: string;
-  options: IOption[];
+  product: IProduct;
 }
 
-export function OptionsForm({ establishmentId, options }: OptionsFormProps) {
+export function OptionsForm({ product }: OptionsFormProps) {
   return (
     <form>
-      {options.map((option) => {
-        return (
-          <OptionCard
-            key={option.id}
-            establishmentId={establishmentId}
-            option={option}
-          />
-        );
+      {product?.options.map((option) => {
+        return <OptionCard key={option.id} product={product} option={option} />;
       })}
 
       <div className="bg-neutrals-100 h-1" />

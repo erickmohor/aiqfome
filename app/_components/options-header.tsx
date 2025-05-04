@@ -31,12 +31,14 @@ export function OptionsHeader({ product }: OptionsHeaderProps) {
       return cartStore.addProducts({
         establishmentId: product.establishmentId,
         productId: product.id,
+        productName: product.name,
         quantity: newQuantity,
       });
     }
     cartStore.addProducts({
       establishmentId: product.establishmentId,
       productId: product.id,
+      productName: product.name,
       quantity: 0,
     });
   };
@@ -47,7 +49,6 @@ export function OptionsHeader({ product }: OptionsHeaderProps) {
 
   const price = productInCart?.total ?? 0;
 
-  let sum = 0;
   const handleIncreaseQuantity = () => {
     setQuantity((currentQuantity) => {
       const newQuantity = currentQuantity + 1;
@@ -97,23 +98,6 @@ export function OptionsHeader({ product }: OptionsHeaderProps) {
             className="opacity-70"
           />
         )}
-      </div>
-
-      <div className="bg-red-100 text-center text-black">
-        {cartStore.options.map((option) => {
-          if (option.productId !== product.id) return;
-          sum += option.total;
-
-          return (
-            <div key={option.id}>
-              <p key={`${option.id}-${option.productId}`}>
-                {option.name}: {option.price} * {option.quantity} ={" "}
-                {option.total}
-              </p>
-              <p>Total manual: {sum}</p>
-            </div>
-          );
-        })}
       </div>
 
       <div className="p-4 pb-6">

@@ -8,11 +8,13 @@ import { useEffect, useState } from "react";
 
 interface OptionItemsRadioProps {
   establishmentId: string;
+  productName: string;
   option: IOption;
 }
 
 export function OptionItemsRadio({
   establishmentId,
+  productName,
   option,
 }: OptionItemsRadioProps) {
   const [defaultItems, setDefaultItems] = useState<ICartOption[]>([]);
@@ -55,6 +57,8 @@ export function OptionItemsRadio({
           optionId: option.id,
           establishmentId,
           productId: option.productId,
+          productName,
+          optionTitle: option.title,
           name: selectedOption.name,
           type: option.type === "size" ? "size" : "extra",
           price,

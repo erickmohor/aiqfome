@@ -8,11 +8,13 @@ import { IOptionItem } from "./option-card";
 
 interface OptionItemsQuantityProps {
   establishmentId: string;
+  productName: string;
   option: IOption;
 }
 
 export function OptionItemsQuantity({
   establishmentId,
+  productName,
   option,
 }: OptionItemsQuantityProps) {
   const [selectedItems, setSelectedItems] = useState<ICartOption[]>([]);
@@ -35,7 +37,12 @@ export function OptionItemsQuantity({
     if (items?.length > 0) {
       return cartStore.addOptions(items);
     }
-    cartStore.removeOptions(establishmentId, option.productId, option.id);
+    cartStore.removeOptions({
+      establishmentId,
+      productId: option.productId,
+      optionId: option.id,
+      productName,
+    });
   };
 
   if (!option) return;
@@ -94,6 +101,8 @@ export function OptionItemsQuantity({
           optionId: option.id,
           establishmentId,
           productId: option.productId,
+          productName,
+          optionTitle: option.title,
           name: item.name,
           type: "extra",
           quantity: 1,

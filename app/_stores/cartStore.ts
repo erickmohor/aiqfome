@@ -5,6 +5,8 @@ export interface ICartOption {
   id: string;
   optionId: string;
   productId: string;
+  productName: string;
+  optionTitle: string;
   establishmentId: string;
   name: string;
   type: "size" | "extra";
@@ -23,9 +25,10 @@ interface ICartTotalProduct {
   total: number;
 }
 
-interface ICartProduct {
+export interface ICartProduct {
   id: string;
   establishmentId: string;
+  productName: string;
   quantity: number;
   price: number;
   optionsTotalPrice: number;
@@ -35,17 +38,27 @@ interface ICartProduct {
 interface IAddProducts {
   establishmentId: string;
   productId: string;
+  productName: string;
   quantity: number;
 }
 
+interface IRemoveOptions {
+  establishmentId: string;
+  productId: string;
+  productName: string;
+  optionId: string;
+}
+
 interface CartStoreProps {
+  establishmentId: string;
   options: ICartOption[];
   addOptions: (options: ICartOption[]) => void;
-  removeOptions: (
-    establishmentId: string,
-    productId: string,
-    optionId: string,
-  ) => void;
+  removeOptions: ({
+    establishmentId,
+    optionId,
+    productId,
+    productName,
+  }: IRemoveOptions) => void;
   optionsTotal: ICartTotalProduct[];
   products: ICartProduct[];
   addProducts: (product: IAddProducts) => void;
@@ -75,6 +88,7 @@ const sumProductOptions = (options: ICartOption[]) => {
 export const useCartStore = create(
   persist<CartStoreProps>(
     (set, get) => ({
+      establishmentId: "",
       products: [],
       total: 0,
       optionsTotal: [],
@@ -82,6 +96,7 @@ export const useCartStore = create(
       addOptions: (optionsReceived: ICartOption[]) => {
         const optionId = optionsReceived[0]?.optionId;
         const productId = optionsReceived[0]?.productId;
+        const productName = optionsReceived[0]?.productName;
         const establishmentId = optionsReceived[0]?.establishmentId;
         let productPrice = 0;
 
@@ -128,6 +143,7 @@ export const useCartStore = create(
             updatedProducts.push({
               id: option.productId,
               establishmentId: option.establishmentId,
+              productName: productName,
               quantity: 0,
               price: productPrice,
               optionsTotalPrice: option.total,
@@ -145,12 +161,22 @@ export const useCartStore = create(
         });
 
         set({ products: updatedProducts });
+
+        const total = updatedProducts.reduce((acc, product) => {
+          if (product.establishmentId === establishmentId) {
+            acc += product.total;
+          }
+          return acc;
+        }, 0);
+
+        set({ total });
       },
-      removeOptions: (
-        establishmentId: string,
-        productId: string,
-        optionId: string,
-      ) => {
+      removeOptions: ({
+        establishmentId,
+        productId,
+        productName,
+        optionId,
+      }: IRemoveOptions) => {
         const currentCartOptions = get().options;
 
         const filteredOptions = currentCartOptions?.filter(
@@ -191,6 +217,7 @@ export const useCartStore = create(
             updatedProducts.push({
               id: option.productId,
               establishmentId: option.establishmentId,
+              productName,
               quantity: 0,
               price: productPrice,
               optionsTotalPrice: option.total,
@@ -208,8 +235,23 @@ export const useCartStore = create(
         });
 
         set({ products: updatedProducts });
+
+        const total = updatedProducts.reduce((acc, product) => {
+          if (product.establishmentId === establishmentId) {
+            acc += product.total;
+          }
+          return acc;
+        }, 0);
+
+        set({ total });
       },
-      addProducts: ({ establishmentId, productId, quantity }: IAddProducts) => {
+      addProducts: ({
+        establishmentId,
+        productId,
+        productName,
+        quantity,
+      }: IAddProducts) => {
+        set({ establishmentId });
         const productsInCart = get().products;
 
         const updatedProducts = productsInCart;
@@ -224,6 +266,7 @@ export const useCartStore = create(
           return updatedProducts.push({
             id: productId,
             establishmentId,
+            productName,
             quantity,
             price: 0,
             optionsTotalPrice: 0,
@@ -239,6 +282,15 @@ export const useCartStore = create(
         }
 
         set({ products: updatedProducts });
+
+        const total = updatedProducts.reduce((acc, product) => {
+          if (product.establishmentId === establishmentId) {
+            acc += product.total;
+          }
+          return acc;
+        }, 0);
+
+        set({ total });
       },
     }),
     {

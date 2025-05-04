@@ -27,10 +27,7 @@ export function Options({ product }: OptionsProps) {
 
           <div className="bg-neutrals-100 h-1" />
 
-          <OptionsForm
-            establishmentId={product.establishmentId}
-            options={product.options}
-          />
+          <OptionsForm product={product} />
         </main>
       </div>
       <OptionsFooter />

@@ -8,11 +8,13 @@ import { IOptionItem } from "./option-card";
 
 interface OptionItemsCheckboxProps {
   establishmentId: string;
+  productName: string;
   option: IOption;
 }
 
 export function OptionItemsCheckbox({
   establishmentId,
+  productName,
   option,
 }: OptionItemsCheckboxProps) {
   const [selectedItems, setSelectedItems] = useState<ICartOption[]>([]);
@@ -35,7 +37,12 @@ export function OptionItemsCheckbox({
     if (items?.length > 0) {
       return cartStore.addOptions(items);
     }
-    cartStore.removeOptions(establishmentId, option.productId, option.id);
+    cartStore.removeOptions({
+      establishmentId,
+      productId: option.productId,
+      optionId: option.id,
+      productName,
+    });
   };
 
   if (!option) return;
@@ -57,6 +64,8 @@ export function OptionItemsCheckbox({
             optionId: option.id,
             establishmentId,
             productId: option.productId,
+            productName,
+            optionTitle: option.title,
             name: item.name,
             type: "extra",
             quantity: 1,
