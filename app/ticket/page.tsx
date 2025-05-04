@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { TicketProductCard } from "../_components/ticket-product-card";
 import { Button } from "../_components/ui/button";
 import { formatCurrency } from "../_helpers/price";
+import Link from "next/link";
 
 export default function TicketPage() {
   const cartStore = useCartStore();
@@ -93,6 +94,16 @@ export default function TicketPage() {
               </div>
             )}
           </div>
+        </div>
+
+        <div className="mt-5 flex justify-center">
+          <Button variant="outline" asChild>
+            <Link href={`/estabelecimentos/${establishment.tag}`}>
+              {products?.length > 0
+                ? "adicionar mais produtos"
+                : "adicionar produtos"}
+            </Link>
+          </Button>
         </div>
       </main>
 
