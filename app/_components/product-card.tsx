@@ -3,6 +3,7 @@ import { calculateProductTotalPrice, formatCurrency } from "../_helpers/price";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -73,8 +74,8 @@ export function ProductCard({ product }: ProductCardProps) {
       <SheetContent className="w-full max-w-[420px] border-0 text-white sm:max-w-[420px]">
         <SheetHeader>
           <SheetTitle></SheetTitle>
+          <SheetDescription></SheetDescription>
         </SheetHeader>
-
         <Options product={product} />
       </SheetContent>
     </Sheet>
