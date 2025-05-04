@@ -313,6 +313,7 @@ export const useCartStore = create(
       removeProduct(establishmentId: string, productId: string) {
         const products = get().products;
         const options = get().options;
+        const productMessages = get().productMessages;
 
         const productsWithoutProductToRemove = products.filter(
           (product) =>
@@ -330,8 +331,17 @@ export const useCartStore = create(
             ),
         );
 
+        const productMessagesWithoutProductToRemove = productMessages.filter(
+          (productMessage) =>
+            !(
+              productMessage.productId === productId &&
+              productMessage.establishmentId === establishmentId
+            ),
+        );
+
         set({ products: productsWithoutProductToRemove });
         set({ options: optionsWithoutProductToRemove });
+        set({ productMessages: productMessagesWithoutProductToRemove });
 
         const total = productsWithoutProductToRemove.reduce((acc, product) => {
           if (product.establishmentId === establishmentId) {
