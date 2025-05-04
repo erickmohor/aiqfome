@@ -62,6 +62,7 @@ interface CartStoreProps {
   optionsTotal: ICartTotalProduct[];
   products: ICartProduct[];
   addProducts: (product: IAddProducts) => void;
+  removeProduct: (establishmentId: string, productId: string) => void;
   total: number;
 }
 
@@ -284,6 +285,38 @@ export const useCartStore = create(
         set({ products: updatedProducts });
 
         const total = updatedProducts.reduce((acc, product) => {
+          if (product.establishmentId === establishmentId) {
+            acc += product.total;
+          }
+          return acc;
+        }, 0);
+
+        set({ total });
+      },
+      removeProduct(establishmentId: string, productId: string) {
+        const products = get().products;
+        const options = get().options;
+
+        const productsWithoutProductToRemove = products.filter(
+          (product) =>
+            !(
+              product.id === productId &&
+              product.establishmentId === establishmentId
+            ),
+        );
+
+        const optionsWithoutProductToRemove = options.filter(
+          (option) =>
+            !(
+              option.productId === productId &&
+              option.establishmentId === establishmentId
+            ),
+        );
+
+        set({ products: productsWithoutProductToRemove });
+        set({ options: optionsWithoutProductToRemove });
+
+        const total = productsWithoutProductToRemove.reduce((acc, product) => {
           if (product.establishmentId === establishmentId) {
             acc += product.total;
           }

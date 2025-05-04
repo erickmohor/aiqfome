@@ -35,12 +35,8 @@ export function OptionsHeader({ product }: OptionsHeaderProps) {
         quantity: newQuantity,
       });
     }
-    cartStore.addProducts({
-      establishmentId: product.establishmentId,
-      productId: product.id,
-      productName: product.name,
-      quantity: 0,
-    });
+
+    cartStore.removeProduct(product.establishmentId, product.id);
   };
 
   const productInCart = cartStore.products.find(
