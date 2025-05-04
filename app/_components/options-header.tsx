@@ -6,6 +6,7 @@ import { CircleMinus, CirclePlus, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { useCartStore } from "../_stores/cartStore";
 import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 interface OptionsHeaderProps {
   product: IProduct;
@@ -38,6 +39,7 @@ export function OptionsHeader({ product }: OptionsHeaderProps) {
     }
 
     cartStore.removeProduct(product.establishmentId, product.id);
+    toast.success("Produto removido com sucesso");
     redirect("/ticket");
   };
 
