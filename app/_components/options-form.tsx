@@ -6,6 +6,7 @@ import { ChangeEventHandler, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "../_stores/cartStore";
+import { toast } from "sonner";
 
 interface OptionsFormProps {
   product: IProduct;
@@ -40,6 +41,31 @@ export function OptionsForm({ product }: OptionsFormProps) {
       message: observationMessage,
     });
 
+    const options = cartStore.options;
+    const products = cartStore.products;
+
+    const sizeIsSelected = options.some(
+      (optionInCart) =>
+        optionInCart.productId === product.id &&
+        optionInCart.establishmentId === product.establishmentId &&
+        optionInCart.type === "size",
+    );
+    const isQuantitySelected = products.some(
+      (optionInCart) =>
+        optionInCart.id === product.id &&
+        optionInCart.establishmentId === product.establishmentId &&
+        optionInCart.quantity > 0,
+    );
+
+    if (!isQuantitySelected) {
+      return toast.error("Selecione a quantidade do produto");
+    }
+
+    if (!sizeIsSelected) {
+      return toast.error("Selecione o tamanho do produto");
+    }
+
+    toast.success("Produto adicionado com sucesso");
     router.push("/ticket");
   };
 
