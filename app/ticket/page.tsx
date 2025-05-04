@@ -8,6 +8,7 @@ import { TicketProductCard } from "../_components/ticket-product-card";
 import { Button } from "../_components/ui/button";
 import { formatCurrency } from "../_helpers/price";
 import Link from "next/link";
+import Footer from "../_components/footer";
 
 export default function TicketPage() {
   const cartStore = useCartStore();
@@ -32,7 +33,23 @@ export default function TicketPage() {
   const total = cartStore?.total;
 
   if (isLoading || !establishment) {
-    return <div>estabelecimento nao encontrado1</div>;
+    return (
+      <div className="flex h-full flex-col">
+        <Header />
+
+        <main className="flex flex-1 flex-col items-center gap-10 py-6">
+          <p className="text-light mt-4 text-center text-sm font-semibold italic">
+            Nenhum produto adicionado ao carrinho
+          </p>
+
+          <Button variant="outline" asChild>
+            <Link href="/">Voltar</Link>
+          </Button>
+        </main>
+
+        <Footer />
+      </div>
+    );
   }
 
   return (
