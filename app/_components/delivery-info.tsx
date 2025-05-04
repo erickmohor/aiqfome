@@ -9,8 +9,10 @@ export default function DeliveryInfo() {
           <Image
             alt="Taxa de entrega"
             src="/icons/motorcycle-purple.svg"
-            width={18}
-            height={18}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="object-fit w-[18px]"
           />
 
           <span className="text-sm font-bold">R$6,00</span>
