@@ -66,7 +66,7 @@ texto do input (opcional)"
 
           <Button
             variant="secondary"
-            className="mt-4 w-full max-w-[350px] p-3"
+            className="mt-4 w-full max-w-[350px] cursor-pointer p-3"
             onClick={handleOnSubmit}
             type="button"
           >
