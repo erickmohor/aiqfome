@@ -1,4 +1,9 @@
-import { options } from "@/app/_mockups/options";
+import {
+  optionsProduct0001,
+  optionsProduct0002,
+  optionsProduct0003,
+  optionsProduct0004,
+} from "@/app/_mockups/options";
 import { IProduct } from "../_components/product-card";
 
 export const products: IProduct[] = [
@@ -12,7 +17,7 @@ export const products: IProduct[] = [
     price: 20.5,
     discountPercentage: 50,
     priceIsNotFixed: false,
-    options,
+    options: optionsProduct0001,
   },
   {
     id: "0002",
@@ -24,7 +29,7 @@ export const products: IProduct[] = [
     price: 13.99,
     discountPercentage: 0,
     priceIsNotFixed: false,
-    options,
+    options: optionsProduct0002,
   },
   {
     id: "0003",
@@ -37,7 +42,7 @@ export const products: IProduct[] = [
     price: 13.99,
     discountPercentage: 0,
     priceIsNotFixed: true,
-    options,
+    options: optionsProduct0003,
   },
   {
     id: "0004",
@@ -49,6 +54,6 @@ export const products: IProduct[] = [
     price: 17.55,
     discountPercentage: 0,
     priceIsNotFixed: true,
-    options,
+    options: optionsProduct0004,
   },
 ];
