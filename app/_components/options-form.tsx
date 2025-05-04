@@ -3,23 +3,19 @@ import { Textarea } from "@/app/_components/ui/textarea";
 import { IOption } from "./options";
 
 interface OptionsFormProps {
+  establishmentId: string;
   options: IOption[];
 }
 
-export function OptionsForm({ options }: OptionsFormProps) {
+export function OptionsForm({ establishmentId, options }: OptionsFormProps) {
   return (
     <form>
       {options.map((option) => {
         return (
           <OptionCard
             key={option.id}
-            id={option.id}
-            productId={option.productId}
-            title={option.title}
-            minQuantity={option.minQuantity}
-            maxQuantity={option.maxQuantity}
-            type={option.type}
-            optionsItems={option.optionsItems}
+            establishmentId={establishmentId}
+            option={option}
           />
         );
       })}

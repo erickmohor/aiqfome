@@ -18,27 +18,36 @@ export interface CartProductItemProps {
   price: number;
 }
 
-export function OptionCard({
-  title,
-  minQuantity,
-  maxQuantity,
-  type,
-  optionsItems,
-}: IOption) {
+interface OptionCardProps {
+  establishmentId: string;
+  option: IOption;
+}
+
+export function OptionCard({ establishmentId, option }: OptionCardProps) {
   return (
     <div className="p-4">
       <OptionCardHeader
-        title={title}
-        minQuantity={minQuantity}
-        maxQuantity={maxQuantity}
+        title={option.title}
+        minQuantity={option.minQuantity}
+        maxQuantity={option.maxQuantity}
       />
 
       <div className="mt-5">
-        {(type === "radio" || type === "size") && (
-          <OptionItemsRadio items={optionsItems} />
+        {(option.type === "radio" || option.type === "size") && (
+          <OptionItemsRadio establishmentId={establishmentId} option={option} />
         )}
-        {type === "checkbox" && <OptionItemsCheckbox items={optionsItems} />}
-        {type === "quantity" && <OptionItemsQuantity items={optionsItems} />}
+        {option.type === "checkbox" && (
+          <OptionItemsCheckbox
+            establishmentId={establishmentId}
+            option={option}
+          />
+        )}
+        {option.type === "quantity" && (
+          <OptionItemsQuantity
+            establishmentId={establishmentId}
+            option={option}
+          />
+        )}
       </div>
     </div>
   );

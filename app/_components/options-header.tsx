@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { IProduct } from "./product-card";
 import { formatCurrency } from "../_helpers/price";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CircleMinus, CirclePlus, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
+import { useCartStore } from "../_stores/cartStore";
 
 interface OptionsHeaderProps {
   product: IProduct;
@@ -12,16 +13,65 @@ interface OptionsHeaderProps {
 export function OptionsHeader({ product }: OptionsHeaderProps) {
   const [quantity, setQuantity] = useState(0);
 
+  const cartStore = useCartStore();
+
+  useEffect(() => {
+    const cartProduct = cartStore.products.find(
+      (cartProduct) =>
+        cartProduct.id === product.id &&
+        cartProduct.establishmentId === product.establishmentId,
+    );
+    if (cartProduct) {
+      setQuantity(cartProduct?.quantity);
+    }
+  }, [cartStore.products, product.establishmentId, product.id]);
+
+  const updateCart = (newQuantity: number) => {
+    if (newQuantity > 0) {
+      return cartStore.addProducts({
+        establishmentId: product.establishmentId,
+        productId: product.id,
+        quantity: newQuantity,
+      });
+    }
+    cartStore.addProducts({
+      establishmentId: product.establishmentId,
+      productId: product.id,
+      quantity: 0,
+    });
+  };
+
+  const productInCart = cartStore.products.find(
+    (cartProduct) => cartProduct.id === product.id,
+  );
+
+  const price = productInCart?.total ?? 0;
+
+  let sum = 0;
   const handleIncreaseQuantity = () => {
-    setQuantity((currentQuantity) => currentQuantity + 1);
+    setQuantity((currentQuantity) => {
+      const newQuantity = currentQuantity + 1;
+
+      queueMicrotask(() => {
+        updateCart(newQuantity);
+      });
+      return newQuantity;
+    });
   };
 
   const handleDecreaseQuantity = () => {
     setQuantity((currentQuantity) => {
+      let newQuantity = 0;
+
       if (currentQuantity > 1) {
-        return currentQuantity - 1;
+        newQuantity = currentQuantity - 1;
       }
-      return 0;
+
+      queueMicrotask(() => {
+        updateCart(newQuantity);
+      });
+
+      return newQuantity;
     });
   };
 
@@ -49,6 +99,23 @@ export function OptionsHeader({ product }: OptionsHeaderProps) {
         )}
       </div>
 
+      <div className="bg-red-100 text-center text-black">
+        {cartStore.options.map((option) => {
+          if (option.productId !== product.id) return;
+          sum += option.total;
+
+          return (
+            <div key={option.id}>
+              <p key={`${option.id}-${option.productId}`}>
+                {option.name}: {option.price} * {option.quantity} ={" "}
+                {option.total}
+              </p>
+              <p>Total manual: {sum}</p>
+            </div>
+          );
+        })}
+      </div>
+
       <div className="p-4 pb-6">
         <div className="space-y-1.5">
           <h1 className="text-neutrals-700 text-xl font-bold">
@@ -71,7 +138,7 @@ export function OptionsHeader({ product }: OptionsHeaderProps) {
             <div className="mt-1.5 flex items-center gap-1">
               <span className="text-light text-sm font-semibold">total</span>
               <span className="text-neutrals-700 text-sm font-bold">
-                {formatCurrency(quantity * product.price)}
+                {formatCurrency(price)}
               </span>
             </div>
           </div>

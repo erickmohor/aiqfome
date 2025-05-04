@@ -1,23 +1,47 @@
 "use client";
 import { formatCurrency } from "../_helpers/price";
-import { CartProductItemProps, IOptionItem } from "./option-card";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CircleMinus, CirclePlus } from "lucide-react";
+import { IOption } from "./options";
+import { ICartOption, useCartStore } from "../_stores/cartStore";
+import { IOptionItem } from "./option-card";
 
 interface OptionItemsQuantityProps {
-  items: IOptionItem[];
+  establishmentId: string;
+  option: IOption;
 }
 
-export function OptionItemsQuantity({ items }: OptionItemsQuantityProps) {
-  const [selectedItems, setSelectedItems] = useState<
-    CartProductItemProps[] | []
-  >([]);
+export function OptionItemsQuantity({
+  establishmentId,
+  option,
+}: OptionItemsQuantityProps) {
+  const [selectedItems, setSelectedItems] = useState<ICartOption[]>([]);
 
-  if (!items || items?.length < 1) return;
+  const cartStore = useCartStore();
+
+  useEffect(() => {
+    const optionsInCart = cartStore.options.filter(
+      (cartOption) =>
+        cartOption.optionId === option.id &&
+        cartOption.productId === option.productId,
+    );
+
+    if (optionsInCart.length > 0) {
+      setSelectedItems(optionsInCart);
+    }
+  }, [cartStore.options, option.id, option.productId]);
+
+  const updateCart = (items: ICartOption[]) => {
+    if (items?.length > 0) {
+      return cartStore.addOptions(items);
+    }
+    cartStore.removeOptions(establishmentId, option.productId, option.id);
+  };
+
+  if (!option) return;
 
   const handleOnChangeQuantity = (
-    name: string,
+    item: IOptionItem,
     currentQuantity: number,
     action: "increase" | "decrease",
   ) => {
@@ -26,7 +50,7 @@ export function OptionItemsQuantity({ items }: OptionItemsQuantityProps) {
     if (action === "decrease") newQuantity = currentQuantity - 1;
 
     const isItemAlreadyOnTheList = selectedItems?.some(
-      (item) => item.name === name,
+      (selectedItem) => selectedItem.name === item.name,
     );
 
     if (action === "decrease" && currentQuantity < 1 && !isItemAlreadyOnTheList)
@@ -35,30 +59,60 @@ export function OptionItemsQuantity({ items }: OptionItemsQuantityProps) {
     if (isItemAlreadyOnTheList) {
       if (action === "decrease" && newQuantity < 1) {
         return setSelectedItems((prev) => {
-          const newItems = prev.filter((item) => item.name !== name);
+          const newItems = prev.filter(
+            (prevItem) => prevItem.name !== item.name,
+          );
+          queueMicrotask(() => {
+            updateCart(newItems);
+          });
           return newItems ?? [];
         });
       }
 
-      return setSelectedItems((prev) =>
-        prev.map((item) => {
-          if (item.name == name) {
-            item.quantity = newQuantity;
+      return setSelectedItems((prev) => {
+        const newItems = prev.map((prevItem) => {
+          if (prevItem.name == item.name) {
+            prevItem.quantity = newQuantity;
+            prevItem.total = prevItem.price * newQuantity;
           }
-          return item;
-        }),
-      );
+          return prevItem;
+        });
+
+        queueMicrotask(() => {
+          updateCart(newItems);
+        });
+
+        return newItems;
+      });
     }
 
-    setSelectedItems((currentItems) => [
-      ...currentItems,
-      { name, quantity: newQuantity, price: 0 },
-    ]);
+    setSelectedItems((currentItems) => {
+      const newItems: ICartOption[] = [
+        ...currentItems,
+        {
+          id: item.id,
+          optionId: option.id,
+          establishmentId,
+          productId: option.productId,
+          name: item.name,
+          type: "extra",
+          quantity: 1,
+          price: item.price ?? 0,
+          total: item.price ?? 0,
+        },
+      ];
+
+      queueMicrotask(() => {
+        updateCart(newItems);
+      });
+
+      return newItems;
+    });
   };
 
   return (
     <div className="space-y-3 pr-4 pl-1">
-      {items.map((item) => {
+      {option.optionsItems.map((item) => {
         let quantity = 0;
         const selectedItem = selectedItems?.find(
           (selItem) => selItem.name === item.name,
@@ -73,8 +127,9 @@ export function OptionItemsQuantity({ items }: OptionItemsQuantityProps) {
             <div className="flex items-center space-x-2">
               <div className="flex items-center gap-1">
                 <button
+                  type="button"
                   onClick={() =>
-                    handleOnChangeQuantity(item.name, quantity, "decrease")
+                    handleOnChangeQuantity(item, quantity, "decrease")
                   }
                 >
                   <CircleMinus
@@ -86,8 +141,9 @@ export function OptionItemsQuantity({ items }: OptionItemsQuantityProps) {
                   {quantity}
                 </span>
                 <button
+                  type="button"
                   onClick={() =>
-                    handleOnChangeQuantity(item.name, quantity, "increase")
+                    handleOnChangeQuantity(item, quantity, "increase")
                   }
                 >
                   <CirclePlus

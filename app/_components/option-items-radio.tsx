@@ -1,27 +1,85 @@
 "use client";
 import { CircleDollarSign } from "lucide-react";
 import { calculateProductTotalPrice, formatCurrency } from "../_helpers/price";
-import { IOptionItem } from "./option-card";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { IOption } from "./options";
+import { ICartOption, useCartStore } from "../_stores/cartStore";
+import { useEffect, useState } from "react";
 
 interface OptionItemsRadioProps {
-  items: IOptionItem[];
+  establishmentId: string;
+  option: IOption;
 }
 
-export function OptionItemsRadio({ items }: OptionItemsRadioProps) {
-  if (!items || items?.length < 1) return;
+export function OptionItemsRadio({
+  establishmentId,
+  option,
+}: OptionItemsRadioProps) {
+  const [defaultItems, setDefaultItems] = useState<ICartOption[]>([]);
+
+  const cartStore = useCartStore();
+
+  useEffect(() => {
+    const optionsInCart = cartStore.options.filter(
+      (cartOption) =>
+        cartOption.optionId === option.id &&
+        cartOption.productId === option.productId,
+    );
+
+    if (optionsInCart.length > 0) {
+      setDefaultItems(optionsInCart);
+    }
+  }, [cartStore.options, option.id, option.productId]);
+
+  if (!option) return;
 
   const handleOptionChange = (value: string) => {
-    console.log("value radio: ", value);
+    const selectedOptions = option.optionsItems.filter(
+      (item) => item.name === value,
+    );
+
+    const selectedOption = selectedOptions[0];
+
+    if (selectedOption) {
+      let price = selectedOption.price ?? 0;
+
+      if (selectedOption.price && selectedOption.discountPercentage) {
+        price = calculateProductTotalPrice({
+          price: selectedOption.price,
+          discountPercentage: selectedOption.discountPercentage,
+        });
+      }
+      cartStore.addOptions([
+        {
+          id: selectedOption.id,
+          optionId: option.id,
+          establishmentId,
+          productId: option.productId,
+          name: selectedOption.name,
+          type: option.type === "size" ? "size" : "extra",
+          price,
+          quantity: 1,
+          total: price,
+        },
+      ]);
+    }
   };
 
   return (
     <div className="pr-4 pl-1">
       <RadioGroup onValueChange={handleOptionChange} className="space-y-3">
-        {items.map((item) => {
+        {option.optionsItems.map((item) => {
+          const itemIsSelected = defaultItems.some(
+            (defaultItem) => defaultItem.id === item.id,
+          );
+
           return (
             <div key={item.name} className="flex items-center space-x-2">
-              <RadioGroupItem value={item.name} id={item.name} />
+              <RadioGroupItem
+                checked={itemIsSelected}
+                value={item.name}
+                id={item.name}
+              />
               <div className="flex w-full items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   {item.discountPercentage && (
