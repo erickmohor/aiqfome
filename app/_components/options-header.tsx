@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { CircleMinus, CirclePlus, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { useCartStore } from "../_stores/cartStore";
+import { redirect } from "next/navigation";
 
 interface OptionsHeaderProps {
   product: IProduct;
@@ -37,6 +38,7 @@ export function OptionsHeader({ product }: OptionsHeaderProps) {
     }
 
     cartStore.removeProduct(product.establishmentId, product.id);
+    redirect("/ticket");
   };
 
   const productInCart = cartStore.products.find(
