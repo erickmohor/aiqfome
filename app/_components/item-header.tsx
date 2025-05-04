@@ -1,16 +1,16 @@
 import { Badge } from "./ui/badge";
 
-interface OptionCardHeaderProps {
+interface ItemHeaderProps {
   title: string;
   minQuantity?: number;
   maxQuantity?: number;
 }
 
-export function OptionCardHeader({
+export function ItemHeader({
   title,
   minQuantity,
   maxQuantity,
-}: OptionCardHeaderProps) {
+}: ItemHeaderProps) {
   return (
     <div className="flex items-start justify-between">
       <div>

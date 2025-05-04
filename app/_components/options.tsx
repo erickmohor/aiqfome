@@ -1,4 +1,4 @@
-import { IOptionItem } from "@/app/_components/option-card";
+import { IItem } from "@/app/_components/item-card";
 import { IProduct } from "./product-card";
 import { OptionsHeader } from "./options-header";
 import { OptionsForm } from "./options-form";
@@ -10,7 +10,7 @@ export interface IOption {
   minQuantity?: number;
   maxQuantity?: number;
   type: "size" | "checkbox" | "radio" | "quantity";
-  optionsItems: IOptionItem[];
+  optionsItems: IItem[];
 }
 
 interface OptionsProps {

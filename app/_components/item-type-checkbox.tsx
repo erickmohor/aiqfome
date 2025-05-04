@@ -3,20 +3,9 @@ import { useEffect, useState } from "react";
 import { formatCurrency } from "../_helpers/price";
 import { Checkbox } from "./ui/checkbox";
 import { ICartOption, useCartStore } from "../_stores/cartStore";
-import { IOption } from "./options";
-import { IOptionItem } from "./option-card";
+import { IItem, ItemTypeProps } from "./item-card";
 
-interface OptionItemsCheckboxProps {
-  establishmentId: string;
-  productName: string;
-  option: IOption;
-}
-
-export function OptionItemsCheckbox({
-  establishmentId,
-  productName,
-  option,
-}: OptionItemsCheckboxProps) {
+export function ItemTypeCheckbox({ product, option }: ItemTypeProps) {
   const [selectedItems, setSelectedItems] = useState<ICartOption[]>([]);
 
   const cartStore = useCartStore();
@@ -38,19 +27,16 @@ export function OptionItemsCheckbox({
       return cartStore.addOptions(items);
     }
     cartStore.removeOptions({
-      establishmentId,
+      establishmentId: product.establishmentId,
+      productName: product.name,
       productId: option.productId,
       optionId: option.id,
-      productName,
     });
   };
 
   if (!option) return;
 
-  const handleCheckedChange = (
-    item: IOptionItem,
-    checked: string | boolean,
-  ) => {
+  const handleCheckedChange = (item: IItem, checked: string | boolean) => {
     const isOptionAlreadyOnTheList = selectedItems?.some(
       (selectedItem) => selectedItem.name === item.name,
     );
@@ -62,9 +48,9 @@ export function OptionItemsCheckbox({
           {
             id: item.id,
             optionId: option.id,
-            establishmentId,
+            establishmentId: product.establishmentId,
+            productName: product.name,
             productId: option.productId,
-            productName,
             optionTitle: option.title,
             name: item.name,
             type: "extra",

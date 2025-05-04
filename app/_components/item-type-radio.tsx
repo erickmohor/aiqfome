@@ -2,21 +2,11 @@
 import { CircleDollarSign } from "lucide-react";
 import { calculateProductTotalPrice, formatCurrency } from "../_helpers/price";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { IOption } from "./options";
 import { ICartOption, useCartStore } from "../_stores/cartStore";
 import { useEffect, useState } from "react";
+import { ItemTypeProps } from "./item-card";
 
-interface OptionItemsRadioProps {
-  establishmentId: string;
-  productName: string;
-  option: IOption;
-}
-
-export function OptionItemsRadio({
-  establishmentId,
-  productName,
-  option,
-}: OptionItemsRadioProps) {
+export function ItemTypeRadio({ product, option }: ItemTypeProps) {
   const [defaultItems, setDefaultItems] = useState<ICartOption[]>([]);
 
   const cartStore = useCartStore();
@@ -55,9 +45,9 @@ export function OptionItemsRadio({
         {
           id: selectedOption.id,
           optionId: option.id,
-          establishmentId,
+          establishmentId: product.establishmentId,
+          productName: product.name,
           productId: option.productId,
-          productName,
           optionTitle: option.title,
           name: selectedOption.name,
           type: option.type === "size" ? "size" : "extra",

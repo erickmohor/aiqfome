@@ -2,21 +2,11 @@
 import { formatCurrency } from "../_helpers/price";
 import { useEffect, useState } from "react";
 import { CircleMinus, CirclePlus } from "lucide-react";
-import { IOption } from "./options";
 import { ICartOption, useCartStore } from "../_stores/cartStore";
-import { IOptionItem } from "./option-card";
+import { IItem } from "./item-card";
+import { ItemTypeProps } from "./item-card";
 
-interface OptionItemsQuantityProps {
-  establishmentId: string;
-  productName: string;
-  option: IOption;
-}
-
-export function OptionItemsQuantity({
-  establishmentId,
-  productName,
-  option,
-}: OptionItemsQuantityProps) {
+export function ItemTypeQuantity({ product, option }: ItemTypeProps) {
   const [selectedItems, setSelectedItems] = useState<ICartOption[]>([]);
 
   const cartStore = useCartStore();
@@ -38,17 +28,17 @@ export function OptionItemsQuantity({
       return cartStore.addOptions(items);
     }
     cartStore.removeOptions({
-      establishmentId,
+      establishmentId: product.establishmentId,
+      productName: product.name,
       productId: option.productId,
       optionId: option.id,
-      productName,
     });
   };
 
   if (!option) return;
 
   const handleOnChangeQuantity = (
-    item: IOptionItem,
+    item: IItem,
     currentQuantity: number,
     action: "increase" | "decrease",
   ) => {
@@ -99,9 +89,9 @@ export function OptionItemsQuantity({
         {
           id: item.id,
           optionId: option.id,
-          establishmentId,
+          establishmentId: product.establishmentId,
+          productName: product.name,
           productId: option.productId,
-          productName,
           optionTitle: option.title,
           name: item.name,
           type: "extra",
