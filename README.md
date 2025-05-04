@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Live Demo
 
-## Getting Started
+https://aiqfome-eta.vercel.app
 
-First, run the development server:
+# Descrição do projeto
+
+Projeto feito em NextJS.
+
+# Para rodar localmente
+
+Para poder rodar o projeto, é necessário possuir:
+
+- [Node.js](https://nodejs.org/)
+- [Yarn](https://yarnpkg.com/) ou [npm](https://www.npmjs.com/)
+
+Após isso, siga as etapas abaixo:
+
+No terminal do seu computador, selecione o diretório que deseja baixar os arquivos.
+
+Agora Clone o diretório
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/erickmohor/aiqfome.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Vá no diretório do projeto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd aiqfome
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Instale as dependências
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+ou
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  yarn install
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Após terminar de instalar as dependências, inicie o servidor.
 
-## Deploy on Vercel
+```bash
+  npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ou
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+  yarn dev
+```
