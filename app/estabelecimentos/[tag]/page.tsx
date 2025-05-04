@@ -11,15 +11,13 @@ import { ChevronRight, Heart, Share2, Star } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-interface EstablishmentPageProps {
-  params: {
-    tag: string;
-  };
-}
+type EstablishmentPageProps = Promise<{ tag: string }>;
 
 export default async function EstablishmentPage({
   params,
-}: EstablishmentPageProps) {
+}: {
+  params: EstablishmentPageProps;
+}) {
   const { tag: establishmentTag } = await params;
 
   const { establishment } = await establishmentService.getEstablishment({
