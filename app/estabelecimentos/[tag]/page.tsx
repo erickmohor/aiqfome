@@ -6,7 +6,7 @@ import { checkIfEstablishmentIsOpenNow, DayOfWeek } from "@/app/_helpers/date";
 import { formatCurrency } from "@/app/_helpers/price";
 import { categoryService } from "@/app/_services/category";
 import { establishmentService } from "@/app/_services/establishment";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import { ChevronRight, Heart, Share2, Star } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -46,7 +46,15 @@ export default async function EstablishmentPage({
   let formattedOpeningHours =
     establishment.establishment_hours[dayOfWeek].opens;
 
-  if (formattedOpeningHours === "closed") {
+  const openingHour = Number(formattedOpeningHours.split(":")[0]);
+  const openingMinutes = Number(formattedOpeningHours.split(":")[1]);
+
+  const establishmentOpensAt = set(new Date(), {
+    hours: openingHour,
+    minutes: openingMinutes,
+  });
+
+  if (new Date() > establishmentOpensAt || formattedOpeningHours === "closed") {
     formattedOpeningHours = "";
   }
 
