@@ -375,22 +375,33 @@ export const useCartStore = create(
       }: IProductMessage) {
         const productMessages = get().productMessages;
 
-        const productIndex = productMessages.findIndex(
+        if (message === "") {
+          const filteredProductMessages = productMessages.filter(
+            (productMessage) =>
+              !(
+                productMessage.establishmentId === establishmentId &&
+                productMessage.productId === productId
+              ),
+          );
+
+          return set({ productMessages: filteredProductMessages });
+        }
+
+        const messageIndex = productMessages.findIndex(
           (item) =>
             item.establishmentId === establishmentId &&
             item.productId === productId,
         );
 
-        if (productIndex > 0) {
-          productMessages[productIndex].message = message;
-          return set({ productMessages });
+        if (messageIndex >= 0) {
+          productMessages[messageIndex].message = message;
+        } else {
+          productMessages.push({
+            establishmentId,
+            productId,
+            message,
+          });
         }
-
-        productMessages.push({
-          establishmentId,
-          productId,
-          message,
-        });
 
         set({ productMessages });
       },
