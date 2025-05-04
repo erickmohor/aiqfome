@@ -94,7 +94,7 @@ export default async function EstablishmentPage({
               )}
             </div>
 
-            <h1 className="text-neutrals- text-neutrals-900 text-xl font-extrabold">
+            <h1 className="text-neutrals-900 text-xl font-extrabold">
               {establishment.name}
             </h1>
           </div>
