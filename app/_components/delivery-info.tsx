@@ -1,7 +1,13 @@
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { IEstablishment } from "../_services/establishment";
+import { formatCurrency } from "../_helpers/price";
 
-export default function DeliveryInfo() {
+interface DeliveryInfoProps {
+  establishment: IEstablishment;
+}
+
+export default function DeliveryInfo({ establishment }: DeliveryInfoProps) {
   return (
     <>
       <div className="flex items-center gap-1.5">
@@ -15,14 +21,20 @@ export default function DeliveryInfo() {
             className="object-fit w-[18px]"
           />
 
-          <span className="text-sm font-bold">R$6,00</span>
+          <span className="text-sm font-bold">
+            {establishment?.delivery_fees[0]?.value &&
+              formatCurrency(establishment.delivery_fees[0].value)}
+          </span>
 
           <ChevronRight size={12} />
         </div>
 
         <div className="text-neutrals-400 text-xs font-bold">•</div>
 
-        <span className="text-light text-xs font-bold">hoje, 30-40 min</span>
+        <span className="text-light text-xs font-bold">
+          hoje, {establishment.delivery_time_in_minutes.min}-
+          {establishment.delivery_time_in_minutes.max} min
+        </span>
 
         <div className="text-neutrals-400 text-xs font-bold">•</div>
 
@@ -31,7 +43,9 @@ export default function DeliveryInfo() {
 
       <div className="mt-1.5 flex w-fit items-center rounded-sm bg-teal-50 px-2 py-1.5">
         <span className="text-xs font-bold text-teal-600">
-          entrega grátis acima de R$ 35,00
+          entrega grátis acima de{" "}
+          {establishment?.min_purchase_value &&
+            formatCurrency(establishment.min_purchase_value)}
         </span>
       </div>
     </>
