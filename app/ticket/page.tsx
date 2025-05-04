@@ -94,8 +94,6 @@ export default function TicketPage() {
             )}
           </div>
         </div>
-
-        <div className="mt-4 w-full max-w-[600px]">Total: {total}</div>
       </main>
 
       <footer className="flex items-center justify-center gap-7 rounded-tl-[12px] rounded-tr-[12px] bg-white p-6 text-center font-bold text-purple-700 shadow-2xl shadow-black">
