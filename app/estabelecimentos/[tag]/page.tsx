@@ -63,8 +63,6 @@ export default async function EstablishmentPage({
     formattedClosingTime: establishment.establishment_hours[dayOfWeek].closes,
   });
 
-  console.log("isOpen: ", isOpen);
-
   return (
     <div className="flex h-full flex-col">
       <Header />
