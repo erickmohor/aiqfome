@@ -12,7 +12,7 @@ export function OptionsFooter() {
           className="mt-4 w-full max-w-[350px] p-3"
           asChild
         >
-          <Link href="/estabelecimentos/pizza-hut">ver ticket</Link>
+          <Link href="/ticket">ver ticket</Link>
         </Button>
       </div>
     </footer>
