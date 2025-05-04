@@ -1,5 +1,5 @@
 "use client";
-import { OptionCard } from "@/app/_components/option-card";
+import { ItemCard } from "@/app/_components/item-card";
 import { Textarea } from "@/app/_components/ui/textarea";
 import { IProduct } from "./product-card";
 import { ChangeEventHandler, useEffect, useState } from "react";
@@ -46,7 +46,7 @@ export function OptionsForm({ product }: OptionsFormProps) {
   return (
     <form>
       {product?.options.map((option) => {
-        return <OptionCard key={option.id} product={product} option={option} />;
+        return <ItemCard key={option.id} product={product} option={option} />;
       })}
 
       <div className="bg-neutrals-100 h-1" />
