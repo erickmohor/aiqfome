@@ -21,6 +21,12 @@ export function TicketProductCard({
 
   const cartStore = useCartStore();
 
+  const productMessage = cartStore.productMessages.find(
+    (productMessage) =>
+      productMessage.establishmentId === establishment.id &&
+      productMessage.productId === product.id,
+  );
+
   useEffect(() => {
     const cartProduct = cartStore.products.find(
       (cartProduct) =>
@@ -118,6 +124,17 @@ export function TicketProductCard({
           return <TicketProductItem key={option.id} option={option} />;
         })}
       </div>
+
+      {productMessage?.message && (
+        <div className="bg-neutrals-50 mt-1.5 flex items-center gap-1 rounded-[4px] p-1.5">
+          <span className="text-neutrals-700 text-xs font-bold">
+            observação:
+          </span>
+          <span className="text-neutrals-700 text-xs font-semibold">
+            {productMessage?.message}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

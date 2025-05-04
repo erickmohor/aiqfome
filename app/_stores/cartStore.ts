@@ -32,6 +32,7 @@ export interface ICartProduct {
   quantity: number;
   price: number;
   optionsTotalPrice: number;
+  message: string;
   total: number;
 }
 
@@ -49,6 +50,12 @@ interface IRemoveOptions {
   optionId: string;
 }
 
+interface IProductMessage {
+  establishmentId: string;
+  productId: string;
+  message: string;
+}
+
 interface CartStoreProps {
   establishmentId: string;
   options: ICartOption[];
@@ -63,6 +70,12 @@ interface CartStoreProps {
   products: ICartProduct[];
   addProducts: (product: IAddProducts) => void;
   removeProduct: (establishmentId: string, productId: string) => void;
+  productMessages: IProductMessage[];
+  addProductMessage: ({
+    productId,
+    establishmentId,
+    message,
+  }: IProductMessage) => void;
   total: number;
 }
 
@@ -94,6 +107,7 @@ export const useCartStore = create(
       total: 0,
       optionsTotal: [],
       options: [],
+      productMessages: [],
       addOptions: (optionsReceived: ICartOption[]) => {
         const optionId = optionsReceived[0]?.optionId;
         const productId = optionsReceived[0]?.productId;
@@ -148,6 +162,7 @@ export const useCartStore = create(
               quantity: 0,
               price: productPrice,
               optionsTotalPrice: option.total,
+              message: "",
               total: option.total,
             });
           }
@@ -222,6 +237,7 @@ export const useCartStore = create(
               quantity: 0,
               price: productPrice,
               optionsTotalPrice: option.total,
+              message: "",
               total: option.total,
             });
           }
@@ -271,6 +287,7 @@ export const useCartStore = create(
             quantity,
             price: 0,
             optionsTotalPrice: 0,
+            message: "",
             total: 0,
           });
         }
@@ -324,6 +341,32 @@ export const useCartStore = create(
         }, 0);
 
         set({ total });
+      },
+      addProductMessage({
+        establishmentId,
+        productId,
+        message,
+      }: IProductMessage) {
+        const productMessages = get().productMessages;
+
+        const productIndex = productMessages.findIndex(
+          (item) =>
+            item.establishmentId === establishmentId &&
+            item.productId === productId,
+        );
+
+        if (productIndex > 0) {
+          productMessages[productIndex].message = message;
+          return set({ productMessages });
+        }
+
+        productMessages.push({
+          establishmentId,
+          productId,
+          message,
+        });
+
+        set({ productMessages });
       },
     }),
     {

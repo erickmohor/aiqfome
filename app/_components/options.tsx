@@ -1,5 +1,4 @@
 import { IOptionItem } from "@/app/_components/option-card";
-import { OptionsFooter } from "./options-footer";
 import { IProduct } from "./product-card";
 import { OptionsHeader } from "./options-header";
 import { OptionsForm } from "./options-form";
@@ -22,15 +21,14 @@ export function Options({ product }: OptionsProps) {
   return (
     <div className="flex h-full flex-col overflow-auto">
       <div className="sm:bg-neutrals-100 flex flex-col items-center">
-        <main className="w-full bg-white">
+        <div className="w-full bg-white">
           <OptionsHeader product={product} />
 
           <div className="bg-neutrals-100 h-1" />
 
           <OptionsForm product={product} />
-        </main>
+        </div>
       </div>
-      <OptionsFooter />
     </div>
   );
 }
