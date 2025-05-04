@@ -21,6 +21,25 @@ export function TicketProductCard({
 
   const cartStore = useCartStore();
 
+  const productOptions = options?.filter(
+    (option) => option.productId === product.id,
+  );
+
+  const optionsByOptionId = () => {
+    const productOptionItems: { [key: string]: ICartOption[] } = {};
+
+    productOptions.forEach((item) => {
+      if (!productOptionItems[item.optionId]) {
+        productOptionItems[item.optionId] = [];
+      }
+      productOptionItems[item.optionId].push(item);
+    });
+
+    return productOptionItems;
+  };
+
+  const groupedOptions = optionsByOptionId();
+
   const productMessage = cartStore.productMessages.find(
     (productMessage) =>
       productMessage.establishmentId === establishment.id &&
@@ -77,10 +96,6 @@ export function TicketProductCard({
     });
   };
 
-  const productOptions = options?.filter(
-    (option) => option.productId === product.id,
-  );
-
   return (
     <div className="p-4">
       <div className="flex items-center justify-between">
@@ -115,8 +130,8 @@ export function TicketProductCard({
       </div>
 
       <div className="mt-1.5 flex flex-col gap-1.5">
-        {productOptions?.map((option) => {
-          return <TicketProductItem key={option.id} option={option} />;
+        {Object.entries(groupedOptions).map(([optionId, itemList]) => {
+          return <TicketProductItem key={optionId} itemList={itemList} />;
         })}
       </div>
 
