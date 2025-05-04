@@ -47,12 +47,7 @@ export function TicketProductCard({
         quantity: newQuantity,
       });
     }
-    cartStore.addProducts({
-      establishmentId: product.establishmentId,
-      productId: product.id,
-      productName: product.productName,
-      quantity: 0,
-    });
+    cartStore.removeProduct(product.establishmentId, product.id);
   };
 
   const handleIncreaseQuantity = () => {
